@@ -40,19 +40,26 @@ public class UpdateChauffeur extends JPanel
    private JLabel updateChauffeurLabelUpdateChauffeur;
    private JLabel lblCancel;
    private JTable tableUpdateChauffeur;
+   private JLabel lblBackUpdateChauffeurButton;
 
    /**
     * All methods for Update Chauffeur
     */
    public void createEvents()
    {
-      Autobus.frame.lblShowFullDescriptionChauffeurButton 
-            .addMouseListener(new MouseAdapter()
+      lblBackUpdateChauffeurButton.addMouseListener(new MouseAdapter() {
+       @Override
+       public void mouseReleased(MouseEvent event) {
+          Autobus.frame.hideAllPanels();
+          Autobus.frame.panelChauffeurs.setVisible(true);
+       }
+      });
+      Autobus.frame.lblShowFullDescriptionChauffeurButton .addMouseListener(new MouseAdapter()
             {
                @Override
                /**
-                * This update additional information in fields for specified Chauffeur
-                */
+                * This updates employeeIDUpdateChauffeur, nameUpdateChauffeur, addressUpdateChauffeur, emailUpdateChauffeur, phoneUpdateChauffeur, mmUpdateChauffeur, ddUpdateChauffeur, yyyyUpdateChauffeur, externalCheckBoxUpdateChauffeur, oneDayCheckBoxUpdateChauffeur, tableUpdateChauffeur fields for selected Chauffeur after the button has been pressed
+                 */
                public void mouseReleased(MouseEvent event)
                {
 
@@ -142,7 +149,7 @@ public class UpdateChauffeur extends JPanel
       updateChauffeurLabelUpdateChauffeur.addMouseListener(new MouseAdapter() {
          @Override
          /**
-          * This updates Chauffeurs: enployeeNumber, name, address, birthday, externalEmployee, onlyOneDayTrips
+          * This updates Chauffeurs old information with the new that has been added in employeeIDUpdateChauffeur, nameUpdateChauffeur, addressUpdateChauffeur, emailUpdateChauffeur, phoneUpdateChauffeur, mmUpdateChauffeur, ddUpdateChauffeur, yyyyUpdateChauffeur, externalCheckBoxUpdateChauffeur, oneDayCheckBoxUpdateChauffeur, tableUpdateChauffeur fields
           */
          public void mouseReleased(MouseEvent event){
             if(Autobus.okOrCancel("Are you sure you want to save these changes") == 0){
@@ -176,7 +183,7 @@ public class UpdateChauffeur extends JPanel
       lblCancel.addMouseListener(new MouseAdapter() {
          @Override
          /**
-          * This shows okOrCancel message after the button has been clicked
+          * This makes an okOrCancel message pop up and ask the user if he really wants to cancel changing this chauffeur. If OK was pressed then all panels are hidden and panelChauffeurs is visible
           */
          public void mouseReleased(MouseEvent event){
             if(Autobus.okOrCancel("Are you sure you want to cancel changing this chauffeur?") == 0) {
@@ -431,18 +438,27 @@ public class UpdateChauffeur extends JPanel
       scrollPane.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       scrollPane.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Chauffeur's Schedule", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(5, 5, 5, 5)));
       scrollPane.setBackground(new Color(95, 158, 160));
+      
+      lblBackUpdateChauffeurButton = new JLabel("Back");
+      lblBackUpdateChauffeurButton.setForeground(Color.WHITE);
+      lblBackUpdateChauffeurButton.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+      lblBackUpdateChauffeurButton.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(2, 2, 2, 2)));
       GroupLayout gl_panel = new GroupLayout(panel);
       gl_panel.setHorizontalGroup(
       	gl_panel.createParallelGroup(Alignment.LEADING)
       		.addGroup(gl_panel.createSequentialGroup()
-      			.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 1371, Short.MAX_VALUE)
+      			.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 1102, Short.MAX_VALUE)
       			.addGap(0))
       		.addGroup(gl_panel.createSequentialGroup()
       			.addGap(12)
       			.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE)
       			.addPreferredGap(ComponentPlacement.UNRELATED)
       			.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 507, GroupLayout.PREFERRED_SIZE)
-      			.addContainerGap(522, Short.MAX_VALUE))
+      			.addContainerGap(253, Short.MAX_VALUE))
+      		.addGroup(gl_panel.createSequentialGroup()
+      			.addContainerGap()
+      			.addComponent(lblBackUpdateChauffeurButton, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+      			.addContainerGap(1050, Short.MAX_VALUE))
       );
       gl_panel.setVerticalGroup(
       	gl_panel.createParallelGroup(Alignment.LEADING)
@@ -452,7 +468,9 @@ public class UpdateChauffeur extends JPanel
       			.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
       				.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 368, GroupLayout.PREFERRED_SIZE)
       				.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 368, GroupLayout.PREFERRED_SIZE))
-      			.addContainerGap(444, Short.MAX_VALUE))
+      			.addPreferredGap(ComponentPlacement.UNRELATED)
+      			.addComponent(lblBackUpdateChauffeurButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+      			.addContainerGap(395, Short.MAX_VALUE))
       );
       
       tableUpdateChauffeur = new JTable();

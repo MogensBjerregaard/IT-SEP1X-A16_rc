@@ -58,21 +58,21 @@ public class UpdateTourPanel extends JPanel {
 	   // START MONTH FIELD
 	   startmonthUpdTour.getDocument().addDocumentListener(new DocumentListener() {
 	      /**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startmonthUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in startmonthUpdTour field
           */
 	      public void changedUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 	      /**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startmonthUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in startmonthUpdTour field
           */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 			/**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startmonthUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in startmonthUpdTour field
           */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
@@ -86,21 +86,21 @@ public class UpdateTourPanel extends JPanel {
 	   // START DAY FIELD
 		startdayUpdTour.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startdayUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in startdayUpdTour field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 		   /**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startdayUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in startdayUpdTour field
           */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 			/**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startdayUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in startdayUpdTour field
           */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
@@ -113,21 +113,21 @@ public class UpdateTourPanel extends JPanel {
 		// START YEAR FIELD
 		startyearUpdTour.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startyearUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in startyearUpdTour field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 		   /**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startyearUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in startyearUpdTour field
           */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 			/**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startyearUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in startyearUpdTour field
           */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
@@ -140,21 +140,21 @@ public class UpdateTourPanel extends JPanel {
 		// START HOUR FIELD
 		starthourUpdTour.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in starthourUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in starthourUpdTour field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 		   /**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in starthourUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in starthourUpdTour field
           */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 			/**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in starthourUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in starthourUpdTour field
           */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
@@ -167,21 +167,21 @@ public class UpdateTourPanel extends JPanel {
 		// START MINUTE FIELD
 		startMinuteUpdTour.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startMinuteUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in startMinuteUpdTour field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 		   /**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startMinuteUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in startMinuteUpdTour field
           */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 			/**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in startMinuteUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in startMinuteUpdTour field
           */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
@@ -194,21 +194,21 @@ public class UpdateTourPanel extends JPanel {
 		// END MONTH FIELD
 		endMonthUpdTour.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endMonthUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in endMonthUpdTour field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 		   /**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endMonthUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in endMonthUpdTour field
           */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 			/**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endMonthUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in endMonthUpdTour field
           */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
@@ -221,21 +221,21 @@ public class UpdateTourPanel extends JPanel {
 		// END DAY FIELD
 		endDayUpdTour.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endDayUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in endDayUpdTour field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 		   /**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endDayUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in endDayUpdTour field
           */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 			/**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endDayUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in endDayUpdTour field
           */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
@@ -248,21 +248,21 @@ public class UpdateTourPanel extends JPanel {
 		// END YEAR FIELD
 		endYearUpdTour.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endYearUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in endYearUpdTour field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 		   /**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endYearUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in endYearUpdTour field
           */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 			/**
-          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endYearUpdTour
+          * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in endYearUpdTour field
           */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
@@ -274,7 +274,7 @@ public class UpdateTourPanel extends JPanel {
 
 		// END HOUR FIELD
 		/**
-       * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endHourUpdTour
+       * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in endHourUpdTour field
        */
 		endHourUpdTour.getDocument().addDocumentListener(new DocumentListener() {
 			public void changedUpdate(DocumentEvent e) {
@@ -282,14 +282,14 @@ public class UpdateTourPanel extends JPanel {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 			/**
-	       * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endHourUpdTour
+	       * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in endHourUpdTour field
 	       */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 			/**
-	       * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endHourUpdTour
+	       * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in endHourUpdTour field
 	       */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
@@ -301,7 +301,7 @@ public class UpdateTourPanel extends JPanel {
 
 		// END MINUTE FIELD
 		/**
-       * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endMinuteUpdTour
+       * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in endMinuteUpdTour field
        */
 		endMinuteUpdTour.getDocument().addDocumentListener(new DocumentListener() {
 			public void changedUpdate(DocumentEvent e) {
@@ -309,14 +309,14 @@ public class UpdateTourPanel extends JPanel {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 			/**
-	       * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endMinuteUpdTour
+	       * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in endMinuteUpdTour field
 	       */
 			public void insertUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableChauffeursUpdTour.getModel());
 			}
 			/**
-	       * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour after a symbols was added in endMinuteUpdTour
+	       * Deletes all rows in tableBusUpdTour and tableChauffeursUpdTour tables after a symbols was added in endMinuteUpdTour field
 	       */
 			public void removeUpdate(DocumentEvent e) {
 				Autobus.frame.deleteAllRows((DefaultTableModel) tableBusesUpdTour.getModel());
@@ -329,7 +329,7 @@ public class UpdateTourPanel extends JPanel {
 		lblSearchButtonUpdTour.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This searches for the Tour according to destination, startDate and endDate
+			 * This searches for the suitable buses and chauffeurs according to destinationUpdTour, startmonthUpdTour, startdayUpdTour, startyearUpdTour, starthourUpdTour, startMinuteUpdTour, endMonthUpdTour, endDayUpdTour, endYearUpdTour, endHourUpdTour, endMinuteUpdTour fields, checks if the information was filled correctly. If some fields are wrong, a notification pops up and says what fields should be changed. Suitable buses and chauffeurs are listed in tableBusesUpdTour and tableChauffeursUpdTour tables after the button has been pressed
 			 */
 			public void mouseReleased(MouseEvent e) {
 				String str = new String("");
@@ -450,7 +450,7 @@ public class UpdateTourPanel extends JPanel {
 		lblAddNewPickUpButtonUpdTour.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * Adds new pick up 
+			 * Adds new pick up to the JList list, where are the pick ups are shown after the button has been pressed
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				if (!pickUpTextFieldUpdTour.getText().equalsIgnoreCase("")) {
@@ -463,7 +463,7 @@ public class UpdateTourPanel extends JPanel {
 		lblClearAllPickUpsButtonUpdTour.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * Clears all pick ups from the table
+			 * Clears all pick ups in JList list after the button has been pressed
 			 */
 			public void mouseReleased(MouseEvent e) {
 				int index = list.getSelectedIndex();
@@ -479,287 +479,270 @@ public class UpdateTourPanel extends JPanel {
 		// SAVE CHANGES BUTTON
 		lblSaveChangesButtonUpdTour.addMouseListener(new MouseAdapter() {
 			/**
-			 * Saves this Tour with updated information
+			 * This saves updated information according to destinationUpdTour, startmonthUpdTour, startdayUpdTour, startyearUpdTour, starthourUpdTour, startMinuteUpdTour, endMonthUpdTour, endDayUpdTour, endYearUpdTour, endHourUpdTour, endMinuteUpdTour fields, checks if the information was filled correctly. If some fields are wrong, a notification pops up and says what fields should be changed, hides all panels and shows panelTours panel after the button has been pressed 
 			 */
 		   public void mouseReleased(MouseEvent event) {
-				String str = new String("");
-				int monthStart = 0;
-				int monthEnd = 0;
-				int dayStart = 0;
-				int dayEnd = 0;
-				int yearStart = 0;
-				int yearEnd = 0;
-				int hourStart =0;
-				int hourEnd =0;
-				int minuteStart =0;
-				int minuteEnd = 0;
-				Date startDate = null;
-				Date endDate = null;
-				java.util.Date javastartDate = null;
-				java.util.Date javaendDate = null;
-				int dayCount = -1;
-				int workHoursPerDay = 8; //for calculating price per passenger (8 hours per day * price per hour = day price)
-				Calendar timeNow = Calendar.getInstance();
-				int currentYear = timeNow.get(Calendar.YEAR);
-				Services services = null;
-				try {
-					services = new Services();
-				} catch (Exception e2) {
+			   if (Autobus.okOrCancel("Are you sure you want to save these changes?") == 0) {
+				   String str = new String("");
+				   int monthStart = 0;
+				   int monthEnd = 0;
+				   int dayStart = 0;
+				   int dayEnd = 0;
+				   int yearStart = 0;
+				   int yearEnd = 0;
+				   int hourStart =0;
+				   int hourEnd =0;
+				   int minuteStart =0;
+				   int minuteEnd = 0;
+				   Date startDate = null;
+				   Date endDate = null;
+				   java.util.Date javastartDate = null;
+				   java.util.Date javaendDate = null;
+				   int dayCount = -1;
+				   int workHoursPerDay = 8; //for calculating price per passenger (8 hours per day * price per hour = day price)
+				   Calendar timeNow = Calendar.getInstance();
+				   int currentYear = timeNow.get(Calendar.YEAR);
+				   Services services = null;
+				   try {
+                       services = new Services();
+                   } catch (Exception e2) {
 
-					e2.printStackTrace();
-				}
-				if (destinationUpdTour.getText().equalsIgnoreCase("")) {
-					str += "\nDestination cannot be empty!";
-				}
+                       e2.printStackTrace();
+                   }
+				   if (destinationUpdTour.getText().equalsIgnoreCase("")) {
+                       str += "\nDestination cannot be empty!";
+                   }
 
-				try {
-					monthStart = Integer.parseInt(startmonthUpdTour.getText());
-					if (monthStart>12||monthStart<1) str = str + "\nStart month does not seem to be a number between 1-12!";
-				} catch (NumberFormatException e1) {
-					str = str + "\nStart month does not seem to be a number between 1-12!";
-				}
-				try {
-					dayStart = Integer.parseInt(startdayUpdTour.getText());
-					if (monthStart==1||monthStart==3||monthStart==5||monthStart==7||monthStart==8||monthStart==10||monthStart==12) {
-						if (!(1<=dayStart&&dayStart<=31)) {
-							str = str + "\nStart day does not seem to be a number between 1-31!";
-						}
-					} else if (monthStart==2){
-						if (!(1<=dayStart&&dayStart<=28)) {
-							str = str + "\nStart day does not seem to be a number between 1-28!";
-						}
-					} else if (monthStart==4||monthStart==6||monthStart==9||monthStart==11){
-						if (!(1<=dayStart&&dayStart<=30)) {
-							str = str + "\nStart day does not seem to be a number between 1-30!";
-						}
-					}
-				} catch (NumberFormatException e1) {
-					str = str + "\nStart day does not seem to be a number between 1-31!";
-				}
-				try {
-					yearStart = Integer.parseInt(startyearUpdTour.getText());
-					if (yearStart<currentYear) str = str + "\nStart year does not appear to be a valid number!";
-				} catch (NumberFormatException e1) {
-					str = str + "\nStart year does not appear to be a valid number!";
-				}
+				   try {
+                       monthStart = Integer.parseInt(startmonthUpdTour.getText());
+                       if (monthStart>12||monthStart<1) str = str + "\nStart month does not seem to be a number between 1-12!";
+                   } catch (NumberFormatException e1) {
+                       str = str + "\nStart month does not seem to be a number between 1-12!";
+                   }
+				   try {
+                       dayStart = Integer.parseInt(startdayUpdTour.getText());
+                       if (monthStart==1||monthStart==3||monthStart==5||monthStart==7||monthStart==8||monthStart==10||monthStart==12) {
+                           if (!(1<=dayStart&&dayStart<=31)) {
+                               str = str + "\nStart day does not seem to be a number between 1-31!";
+                           }
+                       } else if (monthStart==2){
+                           if (!(1<=dayStart&&dayStart<=28)) {
+                               str = str + "\nStart day does not seem to be a number between 1-28!";
+                           }
+                       } else if (monthStart==4||monthStart==6||monthStart==9||monthStart==11){
+                           if (!(1<=dayStart&&dayStart<=30)) {
+                               str = str + "\nStart day does not seem to be a number between 1-30!";
+                           }
+                       }
+                   } catch (NumberFormatException e1) {
+                       str = str + "\nStart day does not seem to be a number between 1-31!";
+                   }
+				   try {
+                       yearStart = Integer.parseInt(startyearUpdTour.getText());
+                       if (yearStart<currentYear) str = str + "\nStart year does not appear to be a valid number!";
+                   } catch (NumberFormatException e1) {
+                       str = str + "\nStart year does not appear to be a valid number!";
+                   }
 
-				try {
-					monthEnd = Integer.parseInt(endMonthUpdTour.getText());
-					if (monthEnd>12||monthEnd<1) str = str + "\nEnd month does not seem to be a number between 1-12!";
-				} catch (NumberFormatException e1) {
-					str = str + "\nEndt month does not seem to be a number between 1-12!";
-				}
-				try {
-					dayEnd = Integer.parseInt(endDayUpdTour.getText());
-					if (monthEnd==1||monthEnd==3||monthEnd==5||monthEnd==7||monthEnd==8||monthEnd==10||monthEnd==12) {
-						if (!(1<=dayEnd&&dayEnd<=31)) {
-							str = str + "\nEnd day does not seem to be a number between 1-31!";
-						}
-					} else if (monthEnd==2){
-						if (!(1<=dayEnd&&dayEnd<=28)) {
-							str = str + "\nEnd day does not seem to be a number between 1-28!";
-						}
-					} else if (monthEnd==4||monthEnd==6||monthEnd==9||monthEnd==11){
-						if (!(1<=dayEnd&&dayEnd<=30)) {
-							str = str + "\nEnd day does not seem to be a number between 1-30!";
-						}
-					}
-				} catch (NumberFormatException e1) {
-					str = str + "\nEnd day does not seem to be a number between 1-31!";
-				}
-				try {
-					yearEnd = Integer.parseInt(endYearUpdTour.getText());
-					if (yearEnd<currentYear) str = str + "\nEnd year does not appear to be a valid number!";
-				} catch (NumberFormatException e1) {
-					str = str + "\nEnd year does not appear to be a valid number!";
-				}
-				Bus bus;
-				if (tableBusesUpdTour.getSelectedRow()==-1){
-					bus = currentlyUpdatingTour.getBus();
-				}
-				else{
-					String strBus = (String)tableBusesUpdTour.getModel().getValueAt(tableBusesUpdTour.getSelectedRow(), 0);
-					bus = Autobus.frame.busesArchive.getBusById(strBus);
-				}
-				Chauffeur chauffeur;
-				if (tableChauffeursUpdTour.getSelectedRow()==-1){
-					chauffeur = currentlyUpdatingTour.getChauffeursObject();
-				}
-				else{
-					String strChauffeur =(String)tableChauffeursUpdTour.getModel().getValueAt(tableChauffeursUpdTour.getSelectedRow(), 0);
-					chauffeur = Autobus.frame.chauffeursArchive.getChauffeurById(strChauffeur);
-				}
+				   try {
+                       monthEnd = Integer.parseInt(endMonthUpdTour.getText());
+                       if (monthEnd>12||monthEnd<1) str = str + "\nEnd month does not seem to be a number between 1-12!";
+                   } catch (NumberFormatException e1) {
+                       str = str + "\nEndt month does not seem to be a number between 1-12!";
+                   }
+				   try {
+                       dayEnd = Integer.parseInt(endDayUpdTour.getText());
+                       if (monthEnd==1||monthEnd==3||monthEnd==5||monthEnd==7||monthEnd==8||monthEnd==10||monthEnd==12) {
+                           if (!(1<=dayEnd&&dayEnd<=31)) {
+                               str = str + "\nEnd day does not seem to be a number between 1-31!";
+                           }
+                       } else if (monthEnd==2){
+                           if (!(1<=dayEnd&&dayEnd<=28)) {
+                               str = str + "\nEnd day does not seem to be a number between 1-28!";
+                           }
+                       } else if (monthEnd==4||monthEnd==6||monthEnd==9||monthEnd==11){
+                           if (!(1<=dayEnd&&dayEnd<=30)) {
+                               str = str + "\nEnd day does not seem to be a number between 1-30!";
+                           }
+                       }
+                   } catch (NumberFormatException e1) {
+                       str = str + "\nEnd day does not seem to be a number between 1-31!";
+                   }
+				   try {
+                       yearEnd = Integer.parseInt(endYearUpdTour.getText());
+                       if (yearEnd<currentYear) str = str + "\nEnd year does not appear to be a valid number!";
+                   } catch (NumberFormatException e1) {
+                       str = str + "\nEnd year does not appear to be a valid number!";
+                   }
+				   Bus bus;
+				   if (tableBusesUpdTour.getSelectedRow()==-1){
+                       bus = currentlyUpdatingTour.getBus();
+                   }
+                   else{
+                       String strBus = (String)tableBusesUpdTour.getModel().getValueAt(tableBusesUpdTour.getSelectedRow(), 0);
+                       bus = Autobus.frame.busesArchive.getBusById(strBus);
+                   }
+				   Chauffeur chauffeur;
+				   if (tableChauffeursUpdTour.getSelectedRow()==-1){
+                       chauffeur = currentlyUpdatingTour.getChauffeursObject();
+                   }
+                   else{
+                       String strChauffeur =(String)tableChauffeursUpdTour.getModel().getValueAt(tableChauffeursUpdTour.getSelectedRow(), 0);
+                       chauffeur = Autobus.frame.chauffeursArchive.getChauffeurById(strChauffeur);
+                   }
 
-				if (yearEnd<yearStart){
-					str += "\nEnd year cannont be before start year!";
-				}
-				if (yearStart==yearEnd&&monthEnd<monthStart){
-					str += "\nEnd date must be after start date!";
-				}
-				if (yearStart==yearEnd&&monthStart==monthEnd&&dayStart>dayEnd){
-					str += "\nEnd date must be later than start date!";
-				}
+				   if (yearEnd<yearStart){
+                       str += "\nEnd year cannont be before start year!";
+                   }
+				   if (yearStart==yearEnd&&monthEnd<monthStart){
+                       str += "\nEnd date must be after start date!";
+                   }
+				   if (yearStart==yearEnd&&monthStart==monthEnd&&dayStart>dayEnd){
+                       str += "\nEnd date must be later than start date!";
+                   }
 
-				SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
-				java.util.Date startRentDate = null, endRentDate = null, currentDate = new java.util.Date();
+				   SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
+				   java.util.Date startRentDate = null, endRentDate = null, currentDate = new java.util.Date();
 
-				try {
-					startRentDate = dateformat.parse(dayStart+"/"+monthStart+"/"+yearStart);
-					endRentDate = dateformat.parse(dayEnd+"/"+monthEnd+"/"+yearEnd);
-				} catch (ParseException e) {
+				   try {
+                       startRentDate = dateformat.parse(dayStart+"/"+monthStart+"/"+yearStart);
+                       endRentDate = dateformat.parse(dayEnd+"/"+monthEnd+"/"+yearEnd);
+                   } catch (ParseException e) {
 
-					e.printStackTrace();
-				}
-				try {
-					hourStart= Integer.parseInt(starthourUpdTour.getText());
-					if (hourStart<0 && hourStart > 23) str = str + "\nStart hour does not appear to be a number between 0-23!";
-				} catch (NumberFormatException e1) {
-					str = str + "\nStart hour does not appear to be a valid number!";
-				}
-				try {
-					hourEnd= Integer.parseInt(endHourUpdTour.getText());
-					if (hourEnd<0 && hourEnd > 23) str = str + "\nEnd hour does not appear to be a number between 0-23!";
-				} catch (NumberFormatException e1) {
-					str = str + "\nEnd hour does not appear to be a valid number!";
-				}
-				try {
-					minuteStart= Integer.parseInt(startMinuteUpdTour.getText());
-					if (minuteStart<0 && minuteStart > 59) str = str + "\nStart minute does not appear to be a number between 0-59!";
-				} catch (NumberFormatException e1) {
-					str = str + "\nStart minute does not appear to be a valid number!";
-				}
-				try {
-					minuteEnd= Integer.parseInt(endMinuteUpdTour.getText());
-					if (minuteEnd<0 && minuteEnd> 59) str = str + "\nEnd minute does not appear to be a number between 0-59!";
-				} catch (NumberFormatException e1) {
-					str = str + "\nEnd minute does not appear to be a valid number!";
-				}
+                       e.printStackTrace();
+                   }
+				   try {
+                       hourStart= Integer.parseInt(starthourUpdTour.getText());
+                       if (hourStart<0 && hourStart > 23) str = str + "\nStart hour does not appear to be a number between 0-23!";
+                   } catch (NumberFormatException e1) {
+                       str = str + "\nStart hour does not appear to be a valid number!";
+                   }
+				   try {
+                       hourEnd= Integer.parseInt(endHourUpdTour.getText());
+                       if (hourEnd<0 && hourEnd > 23) str = str + "\nEnd hour does not appear to be a number between 0-23!";
+                   } catch (NumberFormatException e1) {
+                       str = str + "\nEnd hour does not appear to be a valid number!";
+                   }
+				   try {
+                       minuteStart= Integer.parseInt(startMinuteUpdTour.getText());
+                       if (minuteStart<0 && minuteStart > 59) str = str + "\nStart minute does not appear to be a number between 0-59!";
+                   } catch (NumberFormatException e1) {
+                       str = str + "\nStart minute does not appear to be a valid number!";
+                   }
+				   try {
+                       minuteEnd= Integer.parseInt(endMinuteUpdTour.getText());
+                       if (minuteEnd<0 && minuteEnd> 59) str = str + "\nEnd minute does not appear to be a number between 0-59!";
+                   } catch (NumberFormatException e1) {
+                       str = str + "\nEnd minute does not appear to be a valid number!";
+                   }
 
-				if (str.equals("")) {
-					if (currentDate.equals(startRentDate)&&startRentDate.before(endRentDate)||currentDate.before(startRentDate)&&startRentDate.before(endRentDate)) {
-						dayCount = Autobus.daysBetweenDates(startRentDate, endRentDate);
+				   if (str.equals("")) {
+                       if (currentDate.equals(startRentDate)&&startRentDate.before(endRentDate)||currentDate.before(startRentDate)&&startRentDate.before(endRentDate)) {
+                           dayCount = Autobus.daysBetweenDates(startRentDate, endRentDate);
 
-					}
-					startDate = new Date(monthStart, dayStart, yearStart);
-					endDate = new Date(monthEnd, dayEnd, yearEnd);
-					try {
-						/*!!!!!!*///Autobus.frame.toursArchive.addTour(new Tour(destinationUpdTour.getText()));
-					} catch (Exception e1) {
+                       }
+                       startDate = new Date(monthStart, dayStart, yearStart);
+                       endDate = new Date(monthEnd, dayEnd, yearEnd);
+                       try {
+                           /*!!!!!!*///Autobus.frame.toursArchive.addTour(new Tour(destinationUpdTour.getText()));
+                       } catch (Exception e1) {
 
-						e1.printStackTrace();
-					}
-					DefaultListModel<String> listModel = (DefaultListModel<String>) list.getModel();
-					if (listModel.size()==0) {
-						currentlyUpdatingTour.clearPickUpPlaces();
-						currentlyUpdatingTour.setPickUpPlaces("");
-					}
-					else {
-						currentlyUpdatingTour.clearPickUpPlaces();
-						for (int i = 0; i < listModel.size(); i++) {
-							currentlyUpdatingTour.setPickUpPlaces((String) listModel.getElementAt(i));
-						}
-					}
-					javastartDate = Autobus.parseDate(yearStart+"-" + monthStart + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
-					javaendDate = Autobus.parseDate(yearEnd+"-" + monthEnd + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
-					Bus oldBus = currentlyUpdatingTour.getBus();
-					for (int i = 0; i < oldBus.getListOfStartEndDates().size(); i++) {
-						if(currentlyUpdatingTour.getNewDateInterval()[0].toString().equals(oldBus.getListOfStartEndDates().get(i)[0].toString())){
-							oldBus.getListOfStartEndDates().remove(i);
-							oldBus.setDatePointer(i);
-							break;
-						}
-					}
-					bus.addNewReservationPeriod(new java.util.Date[]{javastartDate,javaendDate});
+                           e1.printStackTrace();
+                       }
+                       DefaultListModel<String> listModel = (DefaultListModel<String>) list.getModel();
+                       if (listModel.size()==0) {
+                           currentlyUpdatingTour.clearPickUpPlaces();
+                           currentlyUpdatingTour.setPickUpPlaces("");
+                       }
+                       else {
+                           currentlyUpdatingTour.clearPickUpPlaces();
+                           for (int i = 0; i < listModel.size(); i++) {
+                               currentlyUpdatingTour.setPickUpPlaces((String) listModel.getElementAt(i));
+                           }
+                       }
+                       javastartDate = Autobus.parseDate(yearStart+"-" + monthStart + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
+                       javaendDate = Autobus.parseDate(yearEnd+"-" + monthEnd + "-" + dayEnd+ "-" + hourEnd + "-" + minuteEnd);
+                       Bus oldBus = currentlyUpdatingTour.getBus();
+                       for (int i = 0; i < oldBus.getListOfStartEndDates().size(); i++) {
+                           if(currentlyUpdatingTour.getNewDateInterval()[0].toString().equals(oldBus.getListOfStartEndDates().get(i)[0].toString())){
+                               oldBus.getListOfStartEndDates().remove(i);
+                               oldBus.setDatePointer(oldBus.getDatePointer() <= i ? oldBus.getDatePointer()  : oldBus.getDatePointer() - 1);
+                               break;
+                           }
+                       }
+                       bus.addNewReservationPeriod(new java.util.Date[]{javastartDate,javaendDate});
 
-					try {
-						Autobus.frame.busesArchive.saveBusesArchive();
-					}
-					catch (Exception e){
-						e.printStackTrace();
-					}
-					currentlyUpdatingTour.setBus(bus);
-					double price = Autobus.round((double)(bus.getPricePerHour()*workHoursPerDay*dayCount)/bus.getMaxNumberOfSeats(),2); //price per passenger rounded to 2 decimals
-					if (allInclusiveUpdTour.isSelected()){
-						price += dayCount*Autobus.frame.priceList.getPriceAllInclusive();
-						services.setAllInclusive(true);
-					}
-					if (breakfastUpdTour.isSelected()){
-						price += dayCount*Autobus.frame.priceList.getPriceBreakfast();
-						services.setBreakfastIncluded(true);
-					}
-					if (lunchUpdTour.isSelected()){
-						price += dayCount*Autobus.frame.priceList.getPriceLunch();
-						services.setLunchIncluded(true);
-					}
-					if (ticketsUpdTour.isSelected()){
-						price += Autobus.frame.priceList.getPriceEntranceTickets();
-						services.setEntranceTickets(true);
-					}
-					currentlyUpdatingTour.setPricePerPassenger(price);
-					currentlyUpdatingTour.setServices(services);
+                       try {
+                           Autobus.frame.busesArchive.saveBusesArchive();
+                       }
+                       catch (Exception e){
+                           e.printStackTrace();
+                       }
+                       currentlyUpdatingTour.setBus(bus);
+                       double price = Autobus.round((double)(bus.getPricePerHour()*workHoursPerDay*dayCount)/bus.getMaxNumberOfSeats(),2); //price per passenger rounded to 2 decimals
+                       if (allInclusiveUpdTour.isSelected()){
+                           price += dayCount*Autobus.frame.priceList.getPriceAllInclusive();
+                           services.setAllInclusive(true);
+                       }
+                       if (breakfastUpdTour.isSelected()){
+                           price += dayCount*Autobus.frame.priceList.getPriceBreakfast();
+                           services.setBreakfastIncluded(true);
+                       }
+                       if (lunchUpdTour.isSelected()){
+                           price += dayCount*Autobus.frame.priceList.getPriceLunch();
+                           services.setLunchIncluded(true);
+                       }
+                       if (ticketsUpdTour.isSelected()){
+                           price += Autobus.frame.priceList.getPriceEntranceTickets();
+                           services.setEntranceTickets(true);
+                       }
+                       currentlyUpdatingTour.setPricePerPassenger(price);
+                       currentlyUpdatingTour.setServices(services);
 
-					Chauffeur oldChauffeur = currentlyUpdatingTour.getChauffeursObject();
-					for (int i = 0; i < oldChauffeur.getListOfStartEndDates().size(); i++) {
-						if(currentlyUpdatingTour.getNewDateInterval()[0].toString().equals(oldChauffeur.getListOfStartEndDates().get(i)[0].toString())) {
-							oldChauffeur.getListOfStartEndDates().remove(i);
-							oldChauffeur.setDatePointer(i);
-							break;
-						}
-					}
-					chauffeur.addNewReservationPeriod(new java.util.Date[]{javastartDate,javaendDate});
+                       Chauffeur oldChauffeur = currentlyUpdatingTour.getChauffeursObject();
+                       for (int i = 0; i < oldChauffeur.getListOfStartEndDates().size(); i++) {
+                           if(currentlyUpdatingTour.getNewDateInterval()[0].toString().equals(oldChauffeur.getListOfStartEndDates().get(i)[0].toString())) {
+                               oldChauffeur.getListOfStartEndDates().remove(i);
+                               oldChauffeur.setDatePointer(oldChauffeur.getDatePointer() <= i ? oldChauffeur.getDatePointer()  : oldChauffeur.getDatePointer() - 1);
+                               break;
+                           }
+                       }
+                       chauffeur.addNewReservationPeriod(new java.util.Date[]{javastartDate,javaendDate});
 
-					try {
-						Autobus.frame.chauffeursArchive.saveChauffeursArchive();
-					}
-					catch (Exception e){
-						e.printStackTrace();
-					}
-					currentlyUpdatingTour.setChauffeur(chauffeur);
-					currentlyUpdatingTour.setDateInterval(new DateInterval(startDate,endDate));
-					currentlyUpdatingTour.setNewDateInterval(new java.util.Date[]{javastartDate, javaendDate});
-					try {
-						Autobus.frame.toursArchive.saveToursArchive();
-					} catch (Exception e) {
+                       try {
+                           Autobus.frame.chauffeursArchive.saveChauffeursArchive();
+                       }
+                       catch (Exception e){
+                           e.printStackTrace();
+                       }
+                       currentlyUpdatingTour.setChauffeur(chauffeur);
+                       currentlyUpdatingTour.setDateInterval(new DateInterval(startDate,endDate));
+                       currentlyUpdatingTour.setNewDateInterval(new java.util.Date[]{javastartDate, javaendDate});
+                       try {
+                           Autobus.frame.toursArchive.saveToursArchive();
+                       } catch (Exception e) {
 
-						e.printStackTrace();
-					}
+                           e.printStackTrace();
+                       }
 
-					/*updateListTours(startDate.displayDate()+" -\n"+endDate.displayDate(), textFieldDestination.getText(),
-							toursArchive.get(toursArchive.size()-1).getPickUpPlacesString(),
-							toursArchive.get(toursArchive.size()-1).getServicesString(), Double.toString(price),
-							"#"+bus.getVehicleID()+" "+bus.getModelString()+" "+bus.getMaxNumberOfSeats()+" seats", "#"+chauffeur.getEmployeeNumber()+" "+chauffeur.getName());*/
-					Autobus.frame.listTours();
-					Autobus.frame.hideAllPanels();
-					Autobus.frame.panelTours.setVisible(true);
+                       Autobus.frame.listTours();
+                       Autobus.frame.hideAllPanels();
+                       Autobus.frame.panelTours.setVisible(true);
 
-				/*	textFieldDestination.setText("");
-					textFieldStartMonth.setText("");
-					textFieldStartDay.setText("");
-					textFieldStartYear.setText("");
-					textFieldEndMonth.setText("");
-					textFieldEndDay.setText("");
-					textFieldEndYear.setText("");
-					chckbxBreakfast.setSelected(false);
-					chckbxLunch.setSelected(false);
-					chckbxAllInclusive.setSelected(false);
-					chckbxEntranceTickets.setSelected(false);
-					textFieldAddPickup.setText("");
-					pickupsTable = (DefaultTableModel) tablePickups.getModel();
-					pickupsTable.setRowCount(0);
-					tableSelectBus.clearSelection();
-					tableSelectChauffeur.clearSelection();*/
 
-				} else {
-					JOptionPane.showMessageDialog(null, "You have to fill out the fields correct:\n"+str);
-				}
 
-			}
+                   } else {
+                       JOptionPane.showMessageDialog(null, "You have to fill out the fields correct:\n"+str);
+                   }
+			   }
+
+		   }
 		 });
 
 		// UPDATE TOUR BUTTON
 		Autobus.frame.lblUpdateTourButton.addMouseListener(new MouseAdapter() {
 			/**
-			 * This updates tables with new information
+			 * This detects the row that was clicked in tableTours table hides, all panels and shows updateTourPanel after the button has been clicked
 			 */
 		   public void mouseReleased(MouseEvent event){
 				currentlyUpdatingTour = Autobus.frame.toursArchive.get(Autobus.frame.tableTours.getSelectedRow());
@@ -781,7 +764,7 @@ public class UpdateTourPanel extends JPanel {
 		// CANCEL UPDATE BUTTON
 		lblCancelUpdateTourButton.addMouseListener(new MouseAdapter() {
 		   /**
-		    * This returns to panelTours after the button has been clicked
+		    * This hides all panels and returns to panelTours after the button has been clicked
 		    */
 			public void mouseReleased(MouseEvent event) {
 				Autobus.frame.hideAllPanels();
@@ -1201,9 +1184,9 @@ public class UpdateTourPanel extends JPanel {
 	}
 	
 	/**
-	 * This lists all Buses in table according to startDate and durationInHours
-	 * @param startDate - start date
-	 * @param durationInHours - duration in hours
+	 * This lists all Buses in table from ChauffeursArchive according to startmonthUpdTour, startdayUpdTour, startyearUpdTour, starthourUpdTour, startMinuteUpdTour, endMonthUpdTour, endDayUpdTour, endYearUpdTour, endHourUpdTour, endMinuteUpdTour fields after the button has been pressed
+	 * @param startDate - start date by which Buses are going to be searched
+	 * @param durationInHours - duration in hours by which Buses are going to be searched
 	 */
 	public void listBuses(java.util.Date startDate, int durationInHours){
 		DefaultTableModel selectBusTable = (DefaultTableModel) tableBusesUpdTour.getModel();
@@ -1220,9 +1203,9 @@ public class UpdateTourPanel extends JPanel {
 	}
 	
 	/**
-	 * This lists all Chauffeurs in table according to startDate and durationInHours
-    * @param startDate - start date
-    * @param durationInHours - duration in hours
+	 * This lists all Buses in table from ChauffeursArchive according to startmonthUpdTour, startdayUpdTour, startyearUpdTour, starthourUpdTour, startMinuteUpdTour, endMonthUpdTour, endDayUpdTour, endYearUpdTour, endHourUpdTour, endMinuteUpdTour fields after the button has been pressed
+    * @param startDate - start date by which Chauffeurs are going to be searched
+    * @param durationInHours - duration in hours by which Chauffeurs are going to be searched
 	 */
 	public void listChauffeurs(java.util.Date startDate, int durationInHours){
 		DefaultTableModel selectChauffeurTable = (DefaultTableModel) tableChauffeursUpdTour.getModel();
@@ -1238,7 +1221,7 @@ public class UpdateTourPanel extends JPanel {
 	}
 
 	/**
-	 * This updates pick up list for this Tour
+	 * This updates JList list for this Tour
 	 * @param newPickUp
 	 */
 	public void updateListPickUps(String newPickUp){

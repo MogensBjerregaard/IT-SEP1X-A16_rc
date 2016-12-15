@@ -39,7 +39,7 @@ public class Autobus extends JFrame {
 	BusesArchive busesArchive;
 	ToursArchive toursArchive;
 	CustomersArchive customersArchive;
-	PassengersArchive passengersArchive;
+	 PassengersArchive passengersArchive;
 	ReservationsArchive reservationsArchive;
 	PriceList priceList;
 	ReservationNumber reservationNumberGenerator;
@@ -316,6 +316,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			try {
 				frame = new Autobus();
 				frame.initExternalComponents();
+				frame.loadArchives();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -338,7 +339,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			
 		initComponents();
 		createEvents();
-		loadArchives();
+		//loadArchives();
 
 	}
 
@@ -370,14 +371,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			//listSelectBus();
 		}
 		
-		toursArchive = new ToursArchive();
-		if (toursArchive.isFileFound()){
-			toursArchive.loadToursArchive();
-			listTours();
-		} else {
-			toursArchive.createFile();
-			listTours();
-		}
+
 		
 		priceList = new PriceList();
 		if (priceList.isFileFound()){
@@ -405,7 +399,23 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			passengersArchive.createFile();
 			listPassengers();
 		}
-		
+
+		reservationNumberGenerator = new ReservationNumber();
+		if (reservationNumberGenerator.isFileFound()){
+			reservationNumberGenerator.loadReservationNumber();;
+		} else {
+			reservationNumberGenerator.createFile();
+		}
+
+		toursArchive = new ToursArchive();
+		if (toursArchive.isFileFound()){
+			toursArchive.loadToursArchive();
+			listTours();
+		} else {
+			toursArchive.createFile();
+			listTours();
+		}
+
 		reservationsArchive = new ReservationsArchive();
 		if (reservationsArchive.isFileFound()){
 			reservationsArchive.loadReservationsArchive();
@@ -415,13 +425,6 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			reservationsArchive.createFile();
 			listBusReservations();
 			listTourReservations();
-		}
-		
-		reservationNumberGenerator = new ReservationNumber();
-		if (reservationNumberGenerator.isFileFound()){
-			reservationNumberGenerator.loadReservationNumber();;
-		} else {
-			reservationNumberGenerator.createFile();
 		}
 	}
 
@@ -434,7 +437,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 
 		/**
-		 * This searches for Bus Reservations by Customer's name according to the symbols in Text Field in BusReservation
+		 * This searches for BusReservtions in reservationsArchive by name of customer according to the symbols in searchBusResTextField TextField. Adds suitable Tour in tableToursInUpdTourRes and always refreshing tableBusReservations table every time a symbol was added in searchBusResTextField TextField by removing no more unsuitable Bus & Chauffeurs Reservations from the tableBusReservations table and adding new once that are suitable
 		 */
 	   searchBusResTextField.getDocument().addDocumentListener(new DocumentListener() {
 		   public void deleteAllRows(final DefaultTableModel model) {
@@ -457,7 +460,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							BusReservation otherBusReservation = (BusReservation)reservationsArchive.get(i);
 							rowData[0] = otherBusReservation.getReservationNumber();
 							rowData[1] = otherBusReservation.getDepartureDate();
-							rowData[2] = otherBusReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherBusReservation.getCustomer().getName();
 							rowData[3] = otherBusReservation.getPassengersString();
 							rowData[4] = otherBusReservation.getChauffeur().getName();
 							rowData[5] = "#"+otherBusReservation.getBus().getVehicleID()+" "+otherBusReservation.getBus().getModel();
@@ -474,7 +477,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							BusReservation otherBusReservation = (BusReservation)reservationsArchive.get(i);
 							rowData[0] = otherBusReservation.getReservationNumber();
 							rowData[1] = otherBusReservation.getDepartureDate();
-							rowData[2] = otherBusReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherBusReservation.getCustomer().getName();
 							rowData[3] = otherBusReservation.getPassengersString();
 							rowData[4] = otherBusReservation.getChauffeur().getName();
 							rowData[5] = "#"+otherBusReservation.getBus().getVehicleID()+" "+otherBusReservation.getBus().getModel();
@@ -500,7 +503,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							BusReservation otherBusReservation = (BusReservation)reservationsArchive.get(i);
 							rowData[0] = otherBusReservation.getReservationNumber();
 							rowData[1] = otherBusReservation.getDepartureDate();
-							rowData[2] = otherBusReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherBusReservation.getCustomer().getName();
 							rowData[3] = otherBusReservation.getPassengersString();
 							rowData[4] = otherBusReservation.getChauffeur().getName();
 							rowData[5] = "#"+otherBusReservation.getBus().getVehicleID()+" "+otherBusReservation.getBus().getModel();
@@ -517,7 +520,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							BusReservation otherBusReservation = (BusReservation)reservationsArchive.get(i);
 							rowData[0] = otherBusReservation.getReservationNumber();
 							rowData[1] = otherBusReservation.getDepartureDate();
-							rowData[2] = otherBusReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherBusReservation.getCustomer().getName();
 							rowData[3] = otherBusReservation.getPassengersString();
 							rowData[4] = otherBusReservation.getChauffeur().getName();
 							rowData[5] = "#"+otherBusReservation.getBus().getVehicleID()+" "+otherBusReservation.getBus().getModel();
@@ -543,7 +546,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							BusReservation otherBusReservation = (BusReservation)reservationsArchive.get(i);
 							rowData[0] = otherBusReservation.getReservationNumber();
 							rowData[1] = otherBusReservation.getDepartureDate();
-							rowData[2] = otherBusReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherBusReservation.getCustomer().getName();
 							rowData[3] = otherBusReservation.getPassengersString();
 							rowData[4] = otherBusReservation.getChauffeur().getName();
 							rowData[5] = "#"+otherBusReservation.getBus().getVehicleID()+" "+otherBusReservation.getBus().getModel();
@@ -560,7 +563,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							BusReservation otherBusReservation = (BusReservation)reservationsArchive.get(i);
 							rowData[0] = otherBusReservation.getReservationNumber();
 							rowData[1] = otherBusReservation.getDepartureDate();
-							rowData[2] = otherBusReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherBusReservation.getCustomer().getName();
 							rowData[3] = otherBusReservation.getPassengersString();
 							rowData[4] = otherBusReservation.getChauffeur().getName();
 							rowData[5] = "#"+otherBusReservation.getBus().getVehicleID()+" "+otherBusReservation.getBus().getModel();
@@ -574,7 +577,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		});
 
 	   /**
-       * This searches for Tours Reservations by Customer's name according to the symbols in Text Field in TourReservations
+       * This searches for TourReservtions in reservationsArchive by name of customer according to the symbols in searchTourResTextField TextField. Adds suitable TourReservations in tableTourReservations and always refreshing tableTourReservations table every time a symbol was added in searchTourResTextField TextField by removing no more unsuitable Tour Reservations from the tableTourReservations table and adding new once that are suitable
        */
 	   searchTourResTextField.getDocument().addDocumentListener(new DocumentListener() {
 			
@@ -598,7 +601,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							TourReservation otherTourReservation = (TourReservation)reservationsArchive.get(i);
 							rowData[0] = otherTourReservation.getReservationNumber();
 							rowData[1] = otherTourReservation.getTour().getDestination()+" "+otherTourReservation.getTour().getDateIntervalString();
-							rowData[2] = otherTourReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherTourReservation.getCustomer().getName();
 							rowData[3] = otherTourReservation.getPassengersString();
 							rowData[4] = otherTourReservation.getTotalPrice();
 							tourResTableModel.addRow(rowData);
@@ -612,7 +615,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							TourReservation otherTourReservation = (TourReservation)reservationsArchive.get(i);
 							rowData[0] = otherTourReservation.getReservationNumber();
 							rowData[1] = otherTourReservation.getTour().getDestination()+" "+otherTourReservation.getTour().getDateIntervalString();
-							rowData[2] = otherTourReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherTourReservation.getCustomer().getName();
 							rowData[3] = otherTourReservation.getPassengersString();
 							rowData[4] = otherTourReservation.getTotalPrice();
 							tourResTableModel.addRow(rowData);
@@ -635,7 +638,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							TourReservation otherTourReservation = (TourReservation)reservationsArchive.get(i);
 							rowData[0] = otherTourReservation.getReservationNumber();
 							rowData[1] = otherTourReservation.getTour().getDestination()+" "+otherTourReservation.getTour().getDateIntervalString();
-							rowData[2] = otherTourReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherTourReservation.getCustomer().getName();
 							rowData[3] = otherTourReservation.getPassengersString();
 							rowData[4] = otherTourReservation.getTotalPrice();
 							tourResTableModel.addRow(rowData);
@@ -649,7 +652,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							TourReservation otherTourReservation = (TourReservation)reservationsArchive.get(i);
 							rowData[0] = otherTourReservation.getReservationNumber();
 							rowData[1] = otherTourReservation.getTour().getDestination()+" "+otherTourReservation.getTour().getDateIntervalString();
-							rowData[2] = otherTourReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherTourReservation.getCustomer().getName();
 							rowData[3] = otherTourReservation.getPassengersString();
 							rowData[4] = otherTourReservation.getTotalPrice();
 							tourResTableModel.addRow(rowData);
@@ -672,7 +675,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							TourReservation otherTourReservation = (TourReservation)reservationsArchive.get(i);
 							rowData[0] = otherTourReservation.getReservationNumber();
 							rowData[1] = otherTourReservation.getTour().getDestination()+" "+otherTourReservation.getTour().getDateIntervalString();
-							rowData[2] = otherTourReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherTourReservation.getCustomer().getName();
 							rowData[3] = otherTourReservation.getPassengersString();
 							rowData[4] = otherTourReservation.getTotalPrice();
 							tourResTableModel.addRow(rowData);
@@ -686,7 +689,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							TourReservation otherTourReservation = (TourReservation)reservationsArchive.get(i);
 							rowData[0] = otherTourReservation.getReservationNumber();
 							rowData[1] = otherTourReservation.getTour().getDestination()+" "+otherTourReservation.getTour().getDateIntervalString();
-							rowData[2] = otherTourReservation.getCustomer().getOrganisationName();
+							rowData[2] = otherTourReservation.getCustomer().getName();
 							rowData[3] = otherTourReservation.getPassengersString();
 							rowData[4] = otherTourReservation.getTotalPrice();
 							tourResTableModel.addRow(rowData);
@@ -697,7 +700,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		});
 
 	   /**
-       * This searches for Tours by destination according to the symbols in Text Field in ToursArchive
+       * This searches for Tour in tourrArchive by name of destination according to the symbols in searchTourTExtField TextField. Adds suitable Tours in tableTours table and always refreshing tableTours table every time a symbol was added in searchTourTExtField TextField by removing no more unsuitable Tours from the tableTours table and adding new once that are suitable
        */
        
 	   searchTourTExtField.getDocument().addDocumentListener(new DocumentListener() {
@@ -832,7 +835,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		});
 
 	   /**
-       * This searches for Chauffeurs by Chauffeur's name according to the symbols in Text Field in ChauffeursArchive
+       * This searches for Chauffeurs in chauffeursArchive by name of this Chauffeur according to the symbols in searchChauffeurTextField TextField. Adds suitable Chauffeurs in tableChauffeurs table and always refreshing tableChauffeurs table every time a symbol was added in searchChauffeurTextField TextField by removing no more unsuitable Chauffeurs from the tableChauffeurs table and adding new once that are suitable
        */
        
 	   searchChauffeurTextField.getDocument().addDocumentListener(new DocumentListener() {
@@ -961,7 +964,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		});
 
 	   /**
-       * This searches for Buses by Vehicle's ID according to the symbols in Text Field in BusesArchive
+       * This searches for Buses in busesArchive by vechicleID of this Bus according to the symbols in searchBusTextField TextField. Adds suitable Buses in tableBuses table and always refreshing tableChauffeurs table every time a symbol was added in searchBusTextField TextField by removing no more unsuitable Buses from the tableBuses table and adding new once that are suitable
        */
        
 	   searchBusTextField.getDocument().addDocumentListener(new DocumentListener() {
@@ -1078,7 +1081,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		});
 
 	   /**
-       * This searches for Customers by name according to the symbols in Text Field in CustomersArchive
+       * This searches for Customers in customersArchive by name of this Customer according to the symbols in searchCustomerInCustomerPanelTextField TextField. Adds suitable Customers in tableCustomers table and always refreshing tableCustomers table every time a symbol was added in searchCustomerInCustomerPanelTextField TextField by removing no more unsuitable Customers from the tableCustomers table and adding new once that are suitable
        */
        
 	   searchCustomerInCustomerPanelTextField.getDocument().addDocumentListener(new DocumentListener() {
@@ -1213,7 +1216,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		});
 
 	   /**
-       * This searches for Passengers by Passenger's name according to the symbols in Text Field in PassengersArchive
+       * This searches for Passengers in passengersArchive by name of this Passenger according to the symbols in searchPassengerTextField TextField. Adds suitable Passengers in tablePassengers table and always refreshing tablePassengers table every time a symbol was added in searchPassengerTextField TextField by removing no more unsuitable Passengers from the tablePassengers table and adding new once that are suitable
        */
        
 	   searchPassengerTextField.getDocument().addDocumentListener(new DocumentListener() {
@@ -1326,7 +1329,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblSelectBusNewBusResButton.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * Updates Summary Pane in BusReservations
+			 * This updates textPaneSummaryNewBus from panelNewBusReservationNext JPanel with the information filled in panelNewBusReservation JPanel fields after the button has been pressed
 			 */
 			public void mouseReleased(MouseEvent e) {
 				updateSummaryNewBus();
@@ -1334,21 +1337,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		});
 		textFieldNewBusStartMonth.getDocument().addDocumentListener(new DocumentListener() {
 			/**
-			 * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusStartMonth
+			 * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusStartMonth field
 			 */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusStartMonth
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusStartMonth field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusStartMonth
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusStartMonth field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
@@ -1361,21 +1364,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		textFieldNewBusStartDay.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusStartDay
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusStartDay field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusStartMonth
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusStartMonth field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusStartMonth
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusStartMonth field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
@@ -1390,21 +1393,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		textFieldNewBusStartYear.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusStartYear
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusStartYear field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusStartYear
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusStartYear field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusStartYear
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusStartYear field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
@@ -1419,21 +1422,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		startHourInNewBusRes.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in startHourInNewBus
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in startHourInNewBus field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in startHourInNewBus
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in startHourInNewBus field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in startHourInNewBus
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in startHourInNewBus field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
@@ -1449,21 +1452,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		startMinuteInNewBusRes.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in startMinuteInNewBus
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in startMinuteInNewBus field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in startMinuteInNewBus
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in startMinuteInNewBus field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in startMinuteInNewBus
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in startMinuteInNewBus field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
@@ -1479,21 +1482,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		textFieldNewBusEndMonth.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusEndMonth
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusEndMonth field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusEndMonth
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusEndMonth field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusEndMonth
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusEndMonth field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
@@ -1509,21 +1512,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		textFieldNewBusEndDay.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusEndDay
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusEndDay field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusEndDay
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusEndDay field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusEndDay
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusEndDay field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
@@ -1539,21 +1542,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		textFieldNewBusEndYear.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusEndYear
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusEndYear field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusEndYear
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusEndYear field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusEndYear
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldNewBusEndYear field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
@@ -1569,21 +1572,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		endtHourInNewBusRes.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in endtHourInNewBusRes
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in endtHourInNewBusRes field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in endtHourInNewBusRes
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in endtHourInNewBusRes field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in endtHourInNewBusRes
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in endtHourInNewBusResfield field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
@@ -1599,21 +1602,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		endMinuteInNewBusRes.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in endtMinutesInNewBusRes
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in endtMinutesInNewBusRes field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in endtMinutesInNewBusRes
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in endtMinutesInNewBusRes field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableNewBusSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in endtMinutesInNewBusRes
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in endtMinutesInNewBusRes field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableNewBusSelectBus.getModel());
@@ -1624,7 +1627,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		lblClearButtonCustomer.addMouseListener(new MouseAdapter() {
 			/**
-			 * This clears all the fields for Customer
+			 * This cancels Updating Existing Customer. After the button has been pressed, an okOrCancel notification pops and asks the user if he really wants to cancel updating. If the user clicks yes, customerPhone, customerName, customerEmail, customerAddress, customerMonth, customerDay, customerYear, customerOrganisation, radioButtonCompany, radioButtonSchool, radioButtonPrivate are cleared
 			 */
 		   @Override
 			public void mouseReleased(MouseEvent e) {
@@ -1649,7 +1652,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblDeleteCustomerPanel.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This deletes Customer from customersArchive 
+			 * This deletes selected Customer from tableCustomers. After the button was pressed, an okOrCancel notification pops up and asks the user if he really wants to delete this customer. If the user clicks OK, the selected Customer is deleted from tableCustomers table and from the customersArchive. CustomerArchive is saved 
 			 */
 			public void mouseReleased(MouseEvent e) {
 				if(okOrCancel("Are you sure you want to delete this customer?") == 0){
@@ -1669,7 +1672,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			@SuppressWarnings("deprecation")
          @Override
 			/**
-			 * This updates Customer information in customersArchive
+			 * This button adds information of the selected Customer from tableCustomers table in customerPhone, customerMoneySpentTextField, customerOrganisation, customerName, customerAddress, customerEmail, customerMonth, customerDay, customerYear fields. If the organisation type is PRIVATE, then radioButtonPrivate is selected, radioButtonCompany and radioButtonSchool aren't selected. If the organisation type is SCHOOL, then radioButtonSchool is selected, radioButtonCompany and radioButtonPrivate aren't selected. If the organisation type is PARTY, then radioButtonParty is selected, radioButtonCompany and radioButtonPrivate aren't selected. If the Customer isn't selected from tableCustomers table and button was pressed, then the notification pops up with the message: "You need to select one of the customers from the table above!" 
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				if (tableCustomers.getSelectedRow() == -1) {
@@ -1710,7 +1713,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			  @SuppressWarnings("deprecation")
          @Override
 			  /**
-			   * This saves changes for Customer and checks if the information was filled correctly
+			   * This updates Changes for the selected Chauffeur from tableCustomers table according to customerPhone, customerMoneySpentTextField, customerOrganisation, customerName, customerAddress, customerEmail, customerMonth, customerDay, customerYear fields. If some fields aren't filled correctly, the notification pops up that says what fields are incorrect
 			   */
 			  public void mouseReleased(MouseEvent e) {
 				  if(currentlyUpdatingCustomer == null)
@@ -1848,8 +1851,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblDeletePassengerButton.addMouseListener(new MouseAdapter() {
 			  @Override
 			  /**
-			   * This deletes selected Passenger from passengersArchive
-			   */
+	          * This deletes selected Passenger from tablePassengers. After the button was pressed, an okOrCancel notification pops up and asks the user if he really wants to delete this passenger. If the user clicks OK, the selected Passenger is deleted from tablePsasengers table and from the passengersArchive. PassengersArchive is saved 
+	          */
 			  public void mouseReleased(MouseEvent e) {
 					if(okOrCancel("Are you sure you want to delete this passenger?") == 0){
 						passengersArchive.removePassenger(tablePassengers.getSelectedRow());
@@ -1866,8 +1869,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	  	});
 
 		/**
-		 * This updates passengers information
-		 */
+       * This button adds information of the selected Passenger from tablePasengers table in passengerPhone, passengerName, passengerEmail, passengerAddress, passengerMonth, passengerDay, passengerYear after the button was pressed
+       */
 		lblUpdatePassengerButton.addMouseListener(new MouseAdapter() {
 		  @SuppressWarnings("deprecation")
       @Override
@@ -1886,8 +1889,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		});
 
 		/**
-		 * This adds new Passenger to passengersArchive and checks in the information was filled correctly
-		 */
+       * This updates Changes for the selected Passenger from tablePassenger table according to passengerPhone, passengerName, passengerAddress, passengerEmail, passengerMonth, passengerDay, passengerYear fields. If some fields aren't filled correctly, the notification pops up that says what fields are incorrect
+       */
 		lblAddNewPassengerButton.addMouseListener(new MouseAdapter() {
 		  @SuppressWarnings("deprecation")
       @Override
@@ -1988,8 +1991,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblClearPassengerButton.addMouseListener(new MouseAdapter() {
 			 @Override
 			 /**
-			  * This clears fields with Passengers information
-			  */
+	          * This cancels Updating Existing Passengers. After the button has been pressed, an okOrCancel notification pops and asks the user if he really wants to cancel updating. If the user clicks yes, passengerPhone, passengerName, passengerAddress, passengerEmail, passengerMonth, passengerDay, passengerYear fields are cleared
+	          */
 			 public void mouseReleased(MouseEvent e) {
 				if(okOrCancel("Are you sure you want to cancel updating?") == 0){
 					currentlyUpdatingPassenger = null;
@@ -2007,21 +2010,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		textFieldStartMonth.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartMonth
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartMonth field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartMonth
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartMonth field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartMonth
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartMonth field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
@@ -2034,21 +2037,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		textFieldStartDay.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartDay
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartDay field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartDay
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartDay field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartDay
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartDay field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
@@ -2061,21 +2064,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		textFieldStartYear.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartYear
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartYear field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartYear
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartYear field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartYear
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartYear field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
@@ -2088,21 +2091,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		textFieldStartHour.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartHour
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartHour field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartHour
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartHour field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartHour
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartHour field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
@@ -2115,21 +2118,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		textFieldStartMinute.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartMinute
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartMinute field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartMinute
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartMinute field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartMinute
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldStartMinute field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
@@ -2142,21 +2145,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		textFieldEndMonth.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndMonth
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndMonth field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndMonth
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndMonth field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndMonth
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndMonth field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
@@ -2169,21 +2172,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		textFieldEndDay.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndDay
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndDay field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndDay
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndDay field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndDay
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndDay field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
@@ -2196,21 +2199,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		textFieldEndYear.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndYear
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndYear field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndYear
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndYear field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndYear
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndYear field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
@@ -2223,21 +2226,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		textFieldEndHour.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndHour
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndHour field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndHour
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndHour field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndHour
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndHour field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
@@ -2250,21 +2253,21 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		textFieldEndMinute.getDocument().addDocumentListener(new DocumentListener() {
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndMinute
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndMinute field
           */
 		   public void changedUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 		   /**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndMinute
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndMinute field
           */
 			public void insertUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
 				deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 			}
 			/**
-          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndMinute
+          * Deletes all rows in tableNewBusSelectBus and tableNewBusSelectChauffeur after a symbols was added in textFieldEndMinute field
           */
 			public void removeUpdate(DocumentEvent e) {
 				deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
@@ -2279,7 +2282,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	   lblSearchForAvailableInNewBusRes.addMouseListener(new MouseAdapter() {
 		   @Override
 		   /**
-		    * This searches for available bus an checks if the information was filled correctly
+		    * This searches for suitable bus in busesArchive, adds them in tableNewBusSelectBus, searches for Chauffeurs in chauffeursArchive, add them in tableNewBusSelectChauffeur in panelNewBusReservationNext according to the information in textFieldNewBusStartMonth, textFieldNewBusStartDay, textFieldNewBusStartYear, startHourInNewBusRes, startMinuteInNewBusRes, textFieldNewBusEndMonth,  textFieldNewBusEndYear, endtHourInNewBusRes, endMinuteInNewBusRes fields. If some of the field are filled incorrectly, the notification pops up and tells what fields are incorrect
 		    */
 		   public void mouseReleased(MouseEvent e) {
 			   String str = new String("");
@@ -2398,8 +2401,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	   lblSearchForAvailableInToursPanel.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This searches for available in TourPanel and checks in the information was filled correctly
-			 */
+          * This searches for suitable bus in busesArchive, adds them in tableSelectBus, searches for Chauffeurs in chauffeursArchive, adds them in tableSelectChauffeur in panelAddTour according to the information in textFieldDestination, textFieldStartMonth, textFieldStartDay, textFieldStartYear, textFieldStartHour, textFieldStartMinute, textFieldEndMonth, textFieldEndDay, textFieldEndYear, textFieldEndHour, textFieldEndMinute fields. If some of the field are filled incorrectly, the notification pops up and tells what fields are incorrect
+          */
 			public void mouseReleased(MouseEvent e) {
 				String str = new String("");
 				int monthStart = 0;
@@ -2554,8 +2557,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblClearAlButtonInNewTourReservation.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This clears all the fields in NewTourReservation
-			 */
+          * This clears all the passengers from tablePassengersInNewTourReservation table in New Tour Reservation Select Passenger after the button has been pressed
+          */
 			public void mouseReleased(MouseEvent arg0) {
 				DefaultTableModel tablePassengersModelInNewTourReservation = (DefaultTableModel)tablePassengersInNewTourReservation.getModel();
 				tablePassengersModelInNewTourReservation.setRowCount(0);
@@ -2567,7 +2570,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 		lblRemoveButtonInNewTourReservation.addMouseListener(new MouseAdapter(){
 			/**
-			 * This removes the passenger from the list after the button has been pressed
+			 * This removes the selected passenger from tablePassengersInNewTourReservation table in New Tour Reservation Select Passenger. After the button has been pressed, an okOrCancel notification pops up with the message: "Are you sure you want to remove this passenger from the list?". If the user clicks OK button, the selected passenger from the table tablePassengersInNewTourReservation is removed
 			 */
 		   public void mouseReleased(MouseEvent event){
 				int index = tablePassengersInNewTourReservation.getSelectedRow();
@@ -2585,8 +2588,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		});
 
 		searchCustomerTextField.getDocument().addDocumentListener(new DocumentListener() {
-		   /**
-	       * This searches for Customers by name according to the symbols in Text Field in NewTourReservation
+		   /** 
+	       * This searches for Customers by name according to the symbols in searchCustomerTextField in NewTourReservation and adds them in customersTableInNewTourReservation table.
 	       */
 	       
 		   public void deleteAllRows(final DefaultTableModel model) {
@@ -2721,8 +2724,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 
 		searchTourTextField.getDocument().addDocumentListener(new DocumentListener() {
-		   /**
-          * This searches for Tours by destination according to the symbols in Text Field in NewTourReservation
+		   /** 
+          * This searches for Tours by destination according to the symbols in searchTourTextField in NewTourReservation and adds them in toursTableInNewTourReservation table.
           */
 		   public void deleteAllRows(final DefaultTableModel model) {
 				for (int i = model.getRowCount() - 1; i >= 0; i--) {
@@ -2875,7 +2878,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblSelectCustomerButtonInNewTourRes.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This identifies the selected Customer 
+			 * This identifies the selected Customer from customersTableInNewTourReservation TextField and adds him to lblSelectedCustomer label
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				int index = customersTableInNewTourReservation.getSelectedRow();
@@ -2887,7 +2890,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblSelectTourButtonInNewTourRes.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-          * This identifies the selected Tour 
+          * This identifies the selected Tour from toursTableInNewTourReservation TextField and adds him to lblSelectedTour label
           */
 			public void mouseReleased(MouseEvent arg0) {
 				int index = tableToursInNewTourReservation.getSelectedRow();
@@ -2904,7 +2907,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 
 			@Override
 			/**
-			 * This creates a new Reservation and checks in the fields were filled correctly
+			 * This creates a new Reservation in panelNewTourReservation, checks if the customer, passengers, and tour are selected lblSelectedTour lblSelectedCustomer lblSelectedPassengers fields. If some of these fields aren't selected, the notification pops up and says what wasn't selected
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				String str = "";
@@ -2978,8 +2981,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					deleteAllRows((DefaultTableModel) tablePassengersInNewTourReservation.getModel());
 					lblSelectedCustomer.setText("");
 					lblSelectedTour.setText("");
-					lblSelectedPassengers.removeAll();
-
+					DefaultListModel<String> listModel = (DefaultListModel<String>) lblSelectedPassengers.getModel();
+					listModel.removeAllElements();
 				}
 				else{
 					JOptionPane.showMessageDialog(null,
@@ -2990,7 +2993,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		mntmAboutAutobus.addActionListener(new ActionListener() {
 			/**
-			 * This shows information about Autobus
+			 * This shows notification about Autobus in mnHelp after the JMenu was clicked
 			 */
 		   public void actionPerformed(ActionEvent arg0) {
 				JOptionPane.showMessageDialog(null, "autobus\u00AE\nBus Transportation Management System version 1.0\n\nDeveloped by:\n"+
@@ -3000,7 +3003,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		mntmExit.addActionListener(new ActionListener() {
 			/**
-			 * This exits the message
+			 * This exits the notification
 			 */
 		   public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
@@ -3009,7 +3012,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		mntmTourReservations.addActionListener(new ActionListener() {
 			/**
-			 * This shows panelTourReservation
+			 * This hides all panels and shows panelTourReservations after the the JMenu was clicked 
 			 */
 		   public void actionPerformed(ActionEvent e) {
 				hideAllPanels();
@@ -3019,7 +3022,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		mntmBusReservations.addActionListener(new ActionListener() {
 		   /**
-          * This shows busReservations
+          * This hides all panels and shows panelBusReservation after the the JMenu was clicked 
           */
 		   public void actionPerformed(ActionEvent e) {
 				hideAllPanels();
@@ -3029,7 +3032,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		mntmEditChauffeur.addActionListener(new ActionListener() {
 		   /**
-          * This shows panelChauffeurs
+          * This hides all panels and shows panelChauffeurs after the the JMenu was clicked 
           */
 		   public void actionPerformed(ActionEvent e) {
 				hideAllPanels();
@@ -3040,7 +3043,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblAddChauffeurButton.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This adds new Chauffeur to chauffeursArchive and checks in the information was filled correctly
+			 * This adds new Chauffeur to chauffeursArchive according to the fields from Chauffeurs Archive: textFieldEmployeeNo, textFieldChauffeurName, textFieldChauffeurAddress, textFieldChauffeurEmail, textFieldChauffeurPhone, textFieldChauffeurBirthMonth, textFieldChauffeurBirthDay, textFieldChauffeurBirthYear, chckbxExternalEmployee, chckbxOnlyOneDayTrips fields. If some of the fields are incorrect, a notification pops up that says what fields should be changed
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				String str = new String("");
@@ -3138,7 +3141,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblDeleteChauffeurBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This removes Chauffeur from chauffeurs Archive
+			 * This removes selected Chauffeur from tableChauffeurs table and chauffeursArchive. After the button was pressed a notification pops up that asks the user if he really wants to remove this Chauffeur. If the user clicks button OK, the selected Chauffeur is deleted from tableChauffeurs table and chauffeursArchive.
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				int index = tableChauffeurs.getSelectedRow();
@@ -3162,7 +3165,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		mntmEditBus.addActionListener(new ActionListener() {
 		   /**
-          * This shows panelBuses
+          * This hides all panels and shows panelBuses after the JMenu was clicked
           */
 		   public void actionPerformed(ActionEvent arg0) {
 				hideAllPanels();
@@ -3172,7 +3175,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		mntmEditTours.addActionListener(new ActionListener() {
 		   /**
-          * This shows panelTours
+          * This hides all panels and shows panelTours after the JMenu was clicked
           */
 		   public void actionPerformed(ActionEvent arg0) {
 				newBusSelectChauffeurTable = (DefaultTableModel) tableNewBusSelectChauffeur.getModel();
@@ -3185,7 +3188,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		});
 		
 		/**
-       * This shows panelCustomers
+       * This hides all panels and shows panelCustomers after the JMenu was clicked
        */
 		mntmEditCustomers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -3196,7 +3199,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		mntmPassengers.addActionListener(new ActionListener() {
 		   /**
-          * This shows panelPassengers
+          * This hides all panels and shows panelPassengers after the JMenu was clicked
           */
 		   public void actionPerformed(ActionEvent e) {			
 				hideAllPanels();
@@ -3205,7 +3208,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		});
 		
 		/**
-       * This shows panelNewTourReservation
+       * This hides all panels and shows panelTourReservation after the JMenu was clicked
        */
 		mntmNewTourReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -3216,7 +3219,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		mntmNewBusReservation.addActionListener(new ActionListener() {
 		   /**
-          * This shows panelNewBusReservation
+          * This hides all panels and shows panelNewBusReservation after the JMenu was clicked
           */
 		   public void actionPerformed(ActionEvent e) {
 				selectBusTable = (DefaultTableModel) tableSelectBus.getModel();
@@ -3230,7 +3233,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		mntmPrices.addActionListener(new ActionListener() {
 		   /**
-          * This shows panelPrices
+          * This hides all panels and shows panelPrices after the JMenu was clicked
           */
 		   public void actionPerformed(ActionEvent e) {
 				hideAllPanels();
@@ -3241,7 +3244,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		labelAddBusBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-          * This adds new Bus to busesArchive and checks in the information is filled correctly
+          * This adds new Bus to busesArchive and tableBuses table according to the panelAddBus, textFieldPriceHour, textFieldNumberSeats, rdbtnStandardBus, rdbtnPartyBus, rdbtnLuxuryBus fields after the button was pressed. If the information is filled incorrectly, the notification pops up and says what fields should are incorrect
           */
 			public void mouseReleased(MouseEvent e) {
 				String str = new String("");
@@ -3314,7 +3317,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		rdbtnStandardBus.addActionListener(new ActionListener() {
 		   /**
-          * This makes only select standard type
+          * This makes rdbtnLuxuryBus and rdbtnPartyBus unselected if the type of this Bus is standard
           */
 		   public void actionPerformed(ActionEvent arg0) {
 				rdbtnLuxuryBus.setSelected(false);
@@ -3324,7 +3327,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		rdbtnPartyBus.addActionListener(new ActionListener() {
 		   /**
-          * This makes only select party type
+          * This makes rdbtnLuxuryBus and rdbtnStandartBus unselected if the type of this Bus is party
           */
 		   public void actionPerformed(ActionEvent e) {
 				rdbtnLuxuryBus.setSelected(false);
@@ -3334,7 +3337,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		rdbtnLuxuryBus.addActionListener(new ActionListener() {
 		   /**
-          * This makes only select luxury type
+          * This makes rdbtnStandartBus and rdbtnPartyBus unselected if the type of this Bus is luxury
           */
 		   public void actionPerformed(ActionEvent e) {
 				rdbtnPartyBus.setSelected(false);
@@ -3345,7 +3348,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		labelDeleteBusBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-          * This deletes selected Bus and updates busesArchive
+          * This deletes selected Bus from tableBuses and busesArchive and updates busesArchive. After the button has been pressed, an okOrCancel notification pops up and asks if the user really wants to delete this Bus. If user clicks OK Button, selected Bus is deleted from tableBuses and busesArchive
           */
 			public void mouseReleased(MouseEvent e) {
 				int index = tableBuses.getSelectedRow();
@@ -3369,7 +3372,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		chckbxBreakfast.addActionListener(new ActionListener() {
 		   /**
-          * This makes select breakfast without all inclusive
+          * If breakfast is selected, chckbxAllInclusive isn't selected
           */
 		   public void actionPerformed(ActionEvent arg0) {
 				chckbxAllInclusive.setSelected(false);		
@@ -3378,7 +3381,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		chckbxLunch.addActionListener(new ActionListener() {
 		   /**
-          * This makes select lunch without all inclusive
+          * If lunch is selected, chckbxAllInclusive isn't selected
           */
 		   public void actionPerformed(ActionEvent e) {
 				chckbxAllInclusive.setSelected(false);
@@ -3387,7 +3390,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		chckbxAllInclusive.addActionListener(new ActionListener() {
 		   /**
-          * This makes select only all inclusive
+          * If allInclusive is selected, chckbxBreakfast and chckbxLunch aren't selected
           */
 		   public void actionPerformed(ActionEvent e) {
 				chckbxBreakfast.setSelected(false);
@@ -3398,7 +3401,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblAddPickUpBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This adds pick up and updates list of pick ups
+			 * This adds pick up from textFieldAddPickup TextField to tablePickups table and updates listPickUps after the button was pressed
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				if (!textFieldAddPickup.getText().equalsIgnoreCase("")) {
@@ -3410,7 +3413,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblClearPickUpBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This clears all pickUps from the table
+			 * This clears selected pickUp from the tablePickups table. If the button is pressed without selected pick up from the tablePickups table, the notification pops with the message: "You need first to select the row you wish to delete!"
 			 */
 			public void mouseReleased(MouseEvent e) {
 				
@@ -3429,7 +3432,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			 */
 			@Override
 			/**
-          * This adds Tour and checks in the information was filled correctly
+          * This adds Tour in Tours Archive according to tableSelectBus, tableSelectChauffeur, tablePickups, chckbxBreakfast, chckbxLunch, chckbxAllInclusive, chckbxEntranceTickets fields. If some of the fields are completed incorrectly, the notification pops up that says what fields should be changed
           */
 			public void mouseReleased(MouseEvent arg0) {
 				String str = new String("");
@@ -3687,7 +3690,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblDeleteTourBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This deletes tour and removes it from the table and saves toursArchive
+			 * This deletes selected Tour from tableTours table and toursArchive. After the button was pressed an okOrCancel notification pops up and asks the user if he really wants to delete this Tour. If the user clicks OK Button, this Tour is deleted from tableTours table and toursArchive
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				int index = tableTours.getSelectedRow();
@@ -3742,7 +3745,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		lblDeleteTourReservation.addMouseListener(new MouseAdapter() {
 		   /**
-		    * This deletes TourReservation and removes it from the table and saves reservationArchive
+		    * This deletes TourReservation from reservationsArchive and removes it from the tableTourReservations table and saves reservationArchive. After the button was pressed an okOrCancel notification pops up and asks if the user really wants to delete selected TourReservation. If users click OK Button, this TourReservation is deleted from tableTourReservations and toursArchive
 		    */
 		   public void mouseReleased(MouseEvent arg0) {
 		      int index = tableTourReservations.getSelectedRow();
@@ -3788,7 +3791,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		lblDeleteBus.addMouseListener(new MouseAdapter() {
 		   /**
-		    * This deletes Bus and removes it from the table and saves busesArchive
+		    * This deletes Bus Reservation from tableBusReservations table and reservationArchive. After the button was pressed an okOrCancel notification pops up and ask the user if he really wants to delete this Bus Reservation. If user clicks OK Button, this Bus Reservation is deleted from tableBusReservations table and reservationArchive.
 		    */
 		   public void mouseReleased(MouseEvent arg0) {
 		      int index = tableBusReservations.getSelectedRow();
@@ -3855,7 +3858,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblUpdatePriceBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This updates prices for breakfast, lunch, allInclusive and entranceTickets
+			 * This updates prices for breakfast, lunch, allInclusive and entranceTickets from textFieldPriceBreakfast, textFieldPriceLunch, textFieldPriceAllinclusive, textFieldPriceEntranceTickets fields after the button was clicked and notification with the message: "Prices where updated succesfully!" appears
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				
@@ -3876,7 +3879,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblNewBusSearchCustomerBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This searches for Customer by phone number
+			 * This searches for Customer from customersArchive by phone number from textFieldNewBusCustomerPhone TextField. If the textFieldNewBusCustomerPhone is empty, a the notification pops up with the message: "You need to fill in the phone number first!". If the Customer wasn't found by the number, the notification pops up with the message: "You need to fill in the phone number first!". After the Customer was found, textFieldNewBusOrganisationName, rdbtnNewBusCompany, rdbtnNewBusSchool, rdbtnNewBusPrivate, textFieldNewBusCustomerName, textFieldNewBusCustomerAddress, textFieldNewBusCustomerEmail, textFieldNewBusCustomerBmonth, textFieldNewBusCustomerBday, textFieldNewBusCustomerByear fields are filled with the information of this Customer 
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				if (textFieldNewBusCustomerPhone.getText().equalsIgnoreCase("")) {
@@ -3931,7 +3934,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblNewBusCustomerClear.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This clears all fields in NewBusCustomer
+			 * This clears textFieldNewBusOrganisationName, rdbtnNewBusCompany, rdbtnNewBusSchool, rdbtnNewBusPrivate, textFieldNewBusCustomerName, textFieldNewBusCustomerAddress, textFieldNewBusCustomerEmail, textFieldNewBusCustomerBmonth, textFieldNewBusCustomerBday, textFieldNewBusCustomerByear fields in NewBusCustomer after the Button was pressed
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				textFieldNewBusOrganisationName.setText("");
@@ -3952,7 +3955,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblClearCustomerButtonNewTourReservation.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This clears Customer fields in NewTourReservation
+			 * This clears lblPhoneInNewTourReservationtextField, customerOrganisationtextField, radioButtonIsCompanyNewTourReservation radioButtonIsSchoolNewTourReservation, radioButtonIsPrivateInNewTourReservation customerNameNewTourReservationTextField, customerAddressIncustomerEmailNewTourReservationTextField, customerEmailNewTourReservationtextField, customerMonthInNewTourReservationTextField, customerDayInNewTourReservationTextField, customerYearInNewTourReservationTextField fields in NewTourReservation after the Button was pressed
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				customerNameNewTourReservationTextField.setText("");
@@ -3972,7 +3975,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		rdbtnNewBusCompany.addActionListener(new ActionListener() {
 			/**
-			 * This makes select only company
+			 * If company is selected for this Customer in New Tour Reservation, rdbtnNewBusPrivate and rdbtnNewBusSchool are unselected
 			 */
 		   public void actionPerformed(ActionEvent arg0) {
 				rdbtnNewBusPrivate.setSelected(false);
@@ -3982,7 +3985,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		rdbtnNewBusSchool.addActionListener(new ActionListener() {
 		   /**
-          * This makes select only school
+          * If school is selected for this Customer in New Tour Reservation, rdbtnNewBusPrivate and rdbtnNewBusCompany are unselected
           */
 		   public void actionPerformed(ActionEvent e) {
 				rdbtnNewBusCompany.setSelected(false);
@@ -3992,7 +3995,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		rdbtnNewBusPrivate.addActionListener(new ActionListener() {
 		   /**
-          * This makes select only private
+          * If private is selected for this Customer in New Tour Reservation, rdbtnNewBusCompany and rdbtnNewBusSchool are unselected
           */
 		   public void actionPerformed(ActionEvent e) {
 				rdbtnNewBusCompany.setSelected(false);
@@ -4003,7 +4006,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		chckbxNewBusIsPassenger.addActionListener(new ActionListener() {
 			/**
-			 * This adds Customer in Passenger Table
+			 * This adds Customer in New Tour Reservation in selectPassengersScrollPanelInNewTourReservation table according to lblPhoneInNewTourReservationtextField, customerOrganisationtextField, radioButtonIsCompanyNewTourReservation radioButtonIsSchoolNewTourReservation, radioButtonIsPrivateInNewTourReservation customerNameNewTourReservationTextField, customerAddressIncustomerEmailNewTourReservationTextField, customerEmailNewTourReservationtextField, customerMonthInNewTourReservationTextField, customerDayInNewTourReservationTextField, customerYearInNewTourReservationTextField fields
 			 */
 		   public void actionPerformed(ActionEvent e) {
 				if (chckbxNewBusIsPassenger.isSelected()) {
@@ -4120,7 +4123,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblNewBusClearAllBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This clears table and checkboxe's in newBus
+			 * This clears all Passengers from tableNewBusPassengers table in New Bus & Chauffeur Reservation
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				newBusPassengersTable.setRowCount(0);
@@ -4131,7 +4134,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblNewBusRemovePassengerBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This removes Passenger from the table
+			 * This removes selected Passenger from tableNewBusPassengers table in New Bus & Chauffeur Reservation. If the button was clicked, an okOrCancel notification pops up and ask the user if he really wants to remove this passenger. If the user clicks OK Button, the selected passenger is removed from tableNewBusPassengers. If the Button was pressed and the passenger wasn't selected from tableNewBusPassengers, the notification pops up with message: "You need first to select the passenger you wish to remove!"
 			 */
 			public void mouseReleased(MouseEvent e) {
 				newBusPassengerReservationTable = (DefaultTableModel) tableNewBusPassengers.getModel(); 
@@ -4149,7 +4152,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblNewBusPassengerClearBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This clears Passengers fields
+			 * This clears Passengers textFieldNewBusPassengerPhone, textFieldNewBusPassengerName, textFieldNewBusPassengerAddress, textFieldNewBusPassengerEmail, textFieldNewBusPassengerBmonth, textFieldNewBusPassengerBday, textFieldNewBusPassengerByear fields after the button was clicked.
 			 */
 			public void mouseReleased(MouseEvent e) {
 				textFieldNewBusPassengerPhone.setText("");
@@ -4165,7 +4168,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblClearButtonPassengerInNewTourReservation.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This clears Passengers fields in NewTourReservation
+			 * This clears Passengers passengerPhoneInNewTourReservation, passengerNameInNewReservation, passengerAddressInNewTourReservation, passengerEmailInNewTourReservation, passengerMonthInNewTourReservation, passengerDayInNewTourReservation, passengerYearInNewTourReservation fields in NewTourReservation
 			 */
 			public void mouseReleased(MouseEvent e) {
 				passengerPhoneInNewTourReservation.setText("");
@@ -4178,109 +4181,10 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 			}
 		});
 
-//IS A PASSENGER CHECKBOX IN NEW TOUR RESERVATION. THIS METHOD WILL CREATE BOTH CUSTOMER AND PASSENGER AND UPDATE ALL TABLES
-		/*this.boxIsAPassengerNewTourReservation.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String str = new String();
-				int month = 0;
-				int day = 0;
-				int year = 0;
-				Calendar timeNow = Calendar.getInstance();
-				int currentYear = timeNow.get(Calendar.YEAR);
-				try {
-					int phone = Integer.parseInt(lblPhoneInNewTourReservationtextField.getText());
-					if (!(10000000<phone&&phone<=99999999)) {
-						str+= "\nPhone number does not have 8 digits!";
-					}
-				} catch (Exception e3) {
-					str+= "\nEntered phone number does not appear to be digits!";
-				}
-				if (customerOrganisationtextField.getText().equalsIgnoreCase("")) {
-					str+= "\nName/organisation cannot be empty!";
-				}
-				if (customerNameNewTourReservationTextField.getText().equalsIgnoreCase("")){
-					str+= "\nName/contact cannot be empty!";
-				}
-				if (customerAddressIncustomerEmailNewTourReservationTextField.getText().equalsIgnoreCase("")) {
-					str+= "\nAddress cannot be empty!";
-				}
-				if (customerEmailNewTourReservationtextField.getText().equalsIgnoreCase("")){
-					str+= "\nEmail address cannot be empty!";
-				}
-				if (!(customerEmailNewTourReservationtextField.getText().contains("@")&&customerEmailNewTourReservationtextField.getText().contains("."))){
-					str+= "\nEmail address does not appear to be in correct format!";
-				}
-				String organisationType = "PRIVATE";
-				if (radioButtonIsCompanyNewTourReservation.isSelected()) {
-					organisationType = "COMPANY";
-				}
-				if (radioButtonIsSchoolNewTourReservation.isSelected()){
-					organisationType = "SCHOOL";
-				}
-
-				try {
-					month = Integer.parseInt(customerMonthInNewTourReservationTextField.getText());
-					if (month>12||month<1) str = str + "\nMonth does not seem to be a number between 1-12!";
-				} catch (NumberFormatException e1) {
-					str = str + "\nMonth does not seem to be a number between 1-12!";
-				}
-				try {
-					day = Integer.parseInt(customerDayInNewTourReservationTextField.getText());
-					if (month==1||month==3||month==5||month==7||month==8||month==10||month==12) {
-						if (!(1<=day&&day<=31)) {
-							str = str + "\nDay does not seem to be a number between 1-31!";
-						}
-					} else if (month==2){
-						if (!(1<=day&&day<=28)) {
-							str = str + "\nDay does not seem to be a number between 1-28!";
-						}
-					} else if (month==4||month==6||month==9||month==11){
-						if (!(1<=day&&day<=30)) {
-							str = str + "\nDay does not seem to be a number between 1-30!";
-						}
-					}
-				} catch (NumberFormatException e1) {
-					str = str + "\nDay does not seem to be a number between 1-31!";
-				}
-				try {
-					year = Integer.parseInt(customerYearInNewTourReservationTextField.getText());
-					if (year>currentYear||year<currentYear-120) str = str + "\nYear does not appear to be a valid number!";
-				} catch (NumberFormatException e1) {
-					str = str + "\nYear does not appear to be a valid number!";
-				}
-
-				if (str.equalsIgnoreCase("")) {
-					customersArchive.addCustomer( new Customer(customerNameNewTourReservationTextField.getText(), customerOrganisationtextField.getText(), customerEmailNewTourReservationtextField.getText(),
-									customerAddressIncustomerEmailNewTourReservationTextField.getText(), new Date(month,day,year), lblPhoneInNewTourReservationtextField.getText(), organisationType));
-					passengersArchive.addPassenger(new Passenger(customerNameNewTourReservationTextField.getText(),customerEmailNewTourReservationtextField.getText(), customerAddressIncustomerEmailNewTourReservationTextField.getText(),new Date(month,day,year), lblPhoneInNewTourReservationtextField.getText()));
-					updateListPassengersInNewTourReservation(passengersArchive.getPassengersArchive().get(passengersArchive.getPassengersArchive().size() -1));
-					updateListPassengers(passengersArchive.getPassengersArchive().get(passengersArchive.getPassengersArchive().size() -1));
-					updateListCustomers(customersArchive.getListOfCustomers().get(customersArchive.getListOfCustomers().size() -1));
-					DefaultListModel<String> listModel = (DefaultListModel<String>) lblSelectedPassengers.getModel();
-					listModel.addElement(passengersArchive.getPassengersArchive().get(passengersArchive.size() -1).getName() + " " +
-							passengersArchive.getPassengersArchive().get(passengersArchive.size() -1).getPhonenumber());
-
-					try {
-						customersArchive.saveCustomersArchive();
-						passengersArchive.savePassengersArchive();
-					} catch (Exception ex) {
-
-						ex.printStackTrace();
-					}
-
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "You have to fill out the fields correct:\n"+str);
-					chckbxNewBusIsPassenger.setSelected(false);
-				}
-
-			}
-		});*/
-
 		lblSearchForPassengerInNewTourReservationButton.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This search for passenger by phone number in NewTourReservation
+			 * This searches for passenger by phone number in passengersArchive in NewTourReservation. If the passenger was found, passengerNameInNewReservation, passengerAddressInNewTourReservation, passengerEmailInNewTourReservation, passengerMonthInNewTourReservation, passengerDayInNewTourReservation, passengerYearInNewTourReservation fields are filled with information from this Passenger. If the passenger wasn't found, the notification pops up with the message: "The passenger with entered phone number could not be found"
 			 */
 			public void mouseReleased(MouseEvent e) {
 				String phoneNumber = passengerPhoneInNewTourReservation.getText();
@@ -4301,7 +4205,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblAddNewPassengerInNewTourReservation.addMouseListener(new MouseAdapter(){
 			@Override
 			/**
-			 * This adds Passenger in NewTourReservation and checks in the information is filled correctly
+			 * This adds Passenger in NewTourReservation to tablePassengersInNewTourReservation table according to passengerPhoneInNewTourReservation, passengerNameInNewReservation, passengerAddressInNewTourReservation, passengerEmailInNewTourReservation, passengerMonthInNewTourReservation, passengerDayInNewTourReservation, passengerYearInNewTourReservation fields. This passenger was added to passengersArchive and passengersArchive was saved. These field are checked and if some of the fields are incorrect, the notification pops up and says what fields are incorrect
 			 */
 			public void mouseReleased(MouseEvent e) {
 				String str="";
@@ -4385,7 +4289,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblNewBusAddPassengerBtn.addMouseListener(new MouseAdapter(){
 			@Override
 			/**
-			 * This adds new Passenger and checks in the information is filled correctly
+			 * This adds new Passenger in tableNewBusPassengers table in New Bus & Chauffeur Reservation according to textFieldNewBusPassengerPhone, textFieldNewBusPassengerName, textFieldNewBusPassengerAddress, textFieldNewBusPassengerEmail, textFieldNewBusPassengerBmonth, textFieldNewBusPassengerBday, textFieldNewBusPassengerByear fields. The fields are checked and if some fields are incorrect, the notification pops up and shows which fields are incorrect
 			 */
 			public void mouseReleased(MouseEvent e) {
 				String str="";
@@ -4464,7 +4368,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblNewBusSearchPassengerBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This searches for Passenger by phone number
+			 * This searches for Passenger in passengersArchive by phone number in textFieldNewBusPassengerPhone Text Field. If textFieldNewBusPassengerPhone Text Field is empty and the Button was pressed, the notification pops up with the information: "You need to fill in the phone number first!". If textFieldNewBusPassengerPhone Text Field has more or less than 8 digits, the notifications pops ups with the message:  "Phone number does not have 8 digits!". If textFieldNewBusPassengerPhone Text Field phonenumber wasn't found in passengersArchive, the notification pops up with the message: "No passenger match found!\nPlease fill in new passenger." If textFieldNewBusPassengerPhone Text Field doesn't have digits, the notification pops up with the information: "Entered phone number does not appear to be digits!".  If textFieldNewBusPassengerPhone Text Field phonenumber is found in passengersArchive, textFieldNewBusPassengerPhone, textFieldNewBusPassengerName, textFieldNewBusPassengerAddress, textFieldNewBusPassengerEmail, textFieldNewBusPassengerBmonth, textFieldNewBusPassengerBday, textFieldNewBusPassengerByear fields are filled with the information from this Passenger 
 			 */
 			public void mouseReleased(MouseEvent e) {
 				if (textFieldNewBusPassengerPhone.getText().equalsIgnoreCase("")) {
@@ -4495,7 +4399,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblNewBusNextBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This checks if the Customers information is filled correctly and shows panelNewBusReservations
+			 * This checks if textFieldNewBusCustomerPhone, textFieldNewBusOrganisationName, rdbtnNewBusCompany, rdbtnNewBusSchool, rdbtnNewBusPrivate, textFieldNewBusCustomerName, textFieldNewBusCustomerAddress, textFieldNewBusCustomerEmail, textFieldNewBusCustomerBmonth, textFieldNewBusCustomerBday, textFieldNewBusCustomerByear, chckbxNewBusIsPassenger, tableNewBusPassengers fields, checks if they are filled correctly, hides all panels and shows panelTouReservationNext. If some fields are filled incorrectly, the notification pops up and says what fields are incorrect  
 			 */
 			public void mouseReleased(MouseEvent e) {
 				String str = new String();
@@ -4567,8 +4471,6 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				if (str.equalsIgnoreCase("")) {
 					hideAllPanels();
 					panelNewBusReservationNext.setVisible(true);
-					//listNewBusSelectBus();
-					//listNewBusSelectChauffeur();
 					try {
 						reservationNumber=reservationNumberGenerator.getReservationNumber();
 					} catch (Exception e1) {
@@ -4584,7 +4486,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblCancel.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This clears the fields in NewBus and shows NewBusReservation
+			 * This clears reservationNumberGenerator, textFieldNewBusCustomerAddress, textFieldNewBusCustomerBday, textFieldNewBusCustomerBmonth, textFieldNewBusCustomerByear, textFieldNewBusCustomerEmail, textFieldNewBusCustomerName, textFieldNewBusCustomerPhone, textFieldNewBusPassengerAddress, textFieldNewBusPassengerBday, textFieldNewBusPassengerBmonth, textFieldNewBusPassengerByear, textFieldNewBusPassengerEmail, textFieldNewBusPassengerName, textFieldNewBusPassengerPhone, newBusPassengersTable, chckbxNewBusIsPassenger, rdbtnNewBusCompany, rdbtnNewBusPrivate, rdbtnNewBusSchool, textFieldNewBusOrganisationName, textFieldNewBusEndDay, textFieldNewBusEndMonth, textFieldNewBusEndYear, textFieldNewBusStartDay, textFieldNewBusStartMonth, textFieldNewBusStartYear fields,hides all panels and shows panelNewBusReservation
 			 */
 			public void mouseReleased(MouseEvent e) {
 				try {
@@ -4626,7 +4528,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		chckbxBreakfastNewBus.addActionListener(new ActionListener() {
 			/**
-			 * This makes choose breakfast without all inclusive
+			 * If the breakfast is selected, chckbxAllInclusiveNewBus is unchecked and the textPaneSummaryNewBus in panelNewBusReservationNext
 			 */
 		   public void actionPerformed(ActionEvent e) {
 				chckbxAllInclusiveNewBus.setSelected(false);
@@ -4636,7 +4538,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		chckbxLunchNewBus.addActionListener(new ActionListener() {
 		   /**
-          * This makes choose lunch without all inclusive
+          * If the lunch is selected, chckbxAllInclusiveNewBus is unchecked and the textPaneSummaryNewBus in panelNewBusReservationNext
           */
 		   public void actionPerformed(ActionEvent e) {
 				chckbxAllInclusiveNewBus.setSelected(false);
@@ -4646,7 +4548,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 		chckbxAllInclusiveNewBus.addActionListener(new ActionListener() {
 		   /**
-          * This makes choose only all inclusive
+          * If the allInclusive is selected, chckbxLunchNewBus and chckbxBreakfastNewBus are unchecked and the textPaneSummaryNewBus in panelNewBusReservationNext
           */
 		   public void actionPerformed(ActionEvent e) {
 				chckbxBreakfastNewBus.setSelected(false);
@@ -4656,7 +4558,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		});
 		
 		/**
-		 * This updates the information in updateSummaryNewBus()
+		 * This updates the information in textPaneSummaryNewBus in panelNewBusReservationNext
 		 */
 		chckbxEntranceTicketsNewBus.addActionListener(new ActionListener() {	
 			@Override
@@ -4666,7 +4568,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		});
 		
 		/**
-		 * This updates the information in updateSummaryNewBus()
+		 * This updates the information in textPaneSummaryNewBus in panelNewBusReservationNext
 		 */
 		lblSelectBusNewBusResButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -4677,7 +4579,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		
 //LISTENER FOR ADDING NEW CUSTOMER IN NEW TOUR RESERVATION
 		/**
-		 * This adds new CustomeButton and checks if the information is filled correctly 
+		 * This adds new Customer in customersTableInNewTourReservation in nnewTourReservation and adds to customersArchive and update customersArchive according to lblPhoneInNewTourReservationtextField, customerOrganisationtextField, radioButtonIsCompanyNewTourReservation, radioButtonIsSchoolNewTourReservation, radioButtonIsPrivateInNewTourReservation, customerNameNewTourReservationTextField, customerAddressIncustomerEmailNewTourReservationTextField, customerEmailNewTourReservationtextField, customerMonthInNewTourReservationTextField, customerDayInNewTourReservationTextField, customerYearInNewTourReservationTextField fields. The fields are checked and if some of the fields are wrong, the notification pops up and says which fields arr wrong 
 		 */
 		lblAddCusomerButtonNewTourReservation.addMouseListener(new MouseAdapter(){
 			@Override
@@ -4795,7 +4697,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblOkNewBusResevation.addMouseListener(new MouseAdapter() {
 			@Override
 			/**
-			 * This methods adds new Reservation to the archive and checks in all information is filled correctly 
+			 * This methods adds new Bus & Chauffeur Reservation to the reservationArchive and updates reservationArchives according to chckbxBreakfastNewBus, chckbxLunchNewBus, chckbxAllInclusiveNewBus, chckbxEntranceTicketsNewBus, tableNewBusSelectBus, tableNewBusSelectChauffeur fields. The fields are checked. If some of the fields are wrong ,the notification pops up and says which fields are incorrect 
 			 */
 			public void mouseReleased(MouseEvent arg0) {
 				String str = new String();
@@ -4818,8 +4720,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				int minuteStart =0;
 				int minuteEnd = 0;
 
-				//int dayCount = -1;
-				//int workHoursPerDay = 8; //for calculating price per passenger (8 hours per day * price per hour = day price)
+
 				Calendar timeNow = Calendar.getInstance();
 				int currentYear = timeNow.get(Calendar.YEAR);
 				try {
@@ -5067,6 +4968,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					}
 
 					try {
+						Autobus.frame.deleteAllRows((DefaultTableModel) tableSelectBus.getModel());
+						Autobus.frame.deleteAllRows((DefaultTableModel) tableSelectChauffeur.getModel());
 						reservationsArchive.saveReservationsArchive();
 						JOptionPane.showMessageDialog(null, "The reservation is now saved to the archive.");
 						textFieldNewBusCustomerAddress.setText("");
@@ -5136,7 +5039,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 	
 	/**
-	 * This shows the information on the summary pane
+	 * This shows the information on textPaneSummaryNewBus in panelNewBusReservationsNext
 	 */
 	public void updateSummaryNewBus(){
 		String str = new String();
@@ -5242,7 +5145,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 	
 	/**
-	 * This lists Chauffeurs from the chauffeursArchive
+	 * This lists Chauffeurs from the chauffeursArchive in the chauffeursTable table
 	 */
 	public void listChauffeurs(){
 		chauffeursTable = (DefaultTableModel) tableChauffeurs.getModel();
@@ -5263,7 +5166,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 	
 	/**
-	 * This adds new Chauffeur to the chuauffeurTable with: employeeNumber, earliestDeparture, name, address, email, phonenumber, birthDay, onlyOneDayTrips
+	 * This adds new Chauffeur to the chuauffeurTable with: employeeNumber, earliestDeparture, name, address, email, phonenumber, birthDay, onlyOneDayTrips table
 	 * @param employeeNumber - employee number for this Chauffeur
 	 * @param earlistDeparture - earliest departure for this Chauffeur
 	 * @param name - name for this Chauffeur
@@ -5287,7 +5190,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 	
 	/**
-	 * This lists suitable Chauffeurs according to the startDate and durationInHours
+	 * This lists suitable Chauffeurs according to the startDate and durationInHours in newBusSelectChauffeurTable table
 	 * @param startDate - start date
 	 * @param durationInHours - duration in hours
 	 */
@@ -5305,7 +5208,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 
 	/**
-    * This lists suitable Bus according to the startDate and durationInHours
+    * This lists suitable Bus according to the startDate and durationInHours in newBusSelectBusTable table
     * @param startDate - start date
     * @param durationInHours - duration in hours
     */
@@ -5326,7 +5229,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 	
 	/**
-	 * This lists all buses from busesArchive
+	 * This lists all buses from busesArchive in busesTable table
 	 */
 	public void listBuses(){
 		busesTable = (DefaultTableModel) tableBuses.getModel();
@@ -5344,7 +5247,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 	
 	/**
-	 * This adds new Bus in the busesTable with: vehicleId, pricePerHour, maxSeats, availableSeats, model, availableForTours
+	 * This adds new Bus in the busesTable with: vehicleId, pricePerHour, maxSeats, availableSeats, model, availableForTours in busesTable table
 	 * @param vehicleId - ID for this Bus
 	 * @param pricePerHour - price per hour for this Bus
 	 * @param maxSeats - max seats for this Bus
@@ -5364,7 +5267,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 	
 	/**
-	 * This lists Tours from toursArchive
+	 * This lists Tours from toursArchive in toursTableInNewTourReservation table
 	 */
 	public void listTours(){
 		toursTable = (DefaultTableModel) tableTours.getModel();
@@ -5401,24 +5304,9 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	 * @param chauffeur - chauffeur for this Tour
 	 * @param services - services for this Tour
 	 */
-	public void updateListTours(String dateInterval, String destination, String pickUps, String seatsAvailable, String price, String pricePerPassenger, String busAndType, String chauffeur, String services){
-		Object[] rowData = new Object[9];
-			rowData[0] = dateInterval;
-			rowData[1] = destination;
-			rowData[2] = pickUps;
-			rowData[3] = seatsAvailable;
-			rowData[4] = price;
-			rowData[5] = pricePerPassenger;
-			rowData[6] = busAndType;
-			rowData[7] = chauffeur;
-			rowData[8] = services;
-			toursTable.addRow(rowData);
-			toursTable = (DefaultTableModel) tableToursInNewTourReservation.getModel();
-			toursTable.addRow(rowData);
-	}
-	
+
 	/**
-	 * This lists Customer from customersArchive
+	 * This lists Customer from customersArchive in customersTable table
 	 */
 	public void listCustomers(){
 		customersTable = (DefaultTableModel) tableCustomers.getModel();
@@ -5453,7 +5341,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 	
 	/**
-	 * This adds a new Customer in customersTable
+	 * This adds a new Customer in customersTable table
 	 * @param newCustomer - new Customer that is added to the table
 	 */
 	public void updateListCustomers(Customer newCustomer){
@@ -5474,7 +5362,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 	
 	/**
-	 * This lists passengers from passengersArchive
+	 * This lists passengers from passengersArchive in passengersTable table
 	 */
 	public void listPassengers(){
 		passengersTable = (DefaultTableModel) tablePassengers.getModel();
@@ -5491,7 +5379,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 
 	/**
-	 * This adds a new Passenger in passengersTalbe
+	 * This adds a new Passenger in passengersTable table
 	 * @param newPassenger - new Passenger that is added to the table
 	 */
 	public void updateListPassengers(Passenger newPassenger){
@@ -5506,7 +5394,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 
 	/**
-	 * This adds a new Passenger in the table in NewTourReservation
+	 * This adds a new Passenger in the table in NewTourReservation in passengersTable table
 	 * @param newPassenger - new passenger that is added in NewTourReservation
 	 */
 	public void updateListPassengersInNewTourReservation(Passenger newPassenger){
@@ -5521,7 +5409,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 	
 	/**
-	 * This adds new pick up on the table
+	 * This adds new pick up on the table in pickupsTable table
 	 */
 	public void updateListPickUps(){
 		pickupsTable = (DefaultTableModel) tablePickups.getModel();
@@ -5532,7 +5420,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 	
 	/**
-	 * This lists suitable Buses according to startDate and durationInHours
+	 * This lists suitable Buses according to startDate and durationInHours in selectBusTable table
 	 * @param startDate - start date
 	 * @param durationInHours - duration in hours
 	 */
@@ -5551,7 +5439,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 
 	/**
-    * This lists suitable Chauffeurs according to startDate and durationInHours
+    * This lists suitable Chauffeurs according to startDate and durationInHours in selectChauffeurTable table
     * @param startDate - start date
     * @param durationInHours - duration in hours
     */
@@ -5570,25 +5458,8 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		 
 	}
 	
-	/*public void updateListSelectChauffeur(Chauffeur newChauffeur) {
-	   selectChauffeurTable = (DefaultTableModel) tableSelectChauffeur.getModel();
-	   Object[] rowData = new Object[2];
-	   rowData[0] = newChauffeur.getEmployeeNumber();
-	   rowData[1] = newChauffeur.getName();
-	   selectChauffeurTable.addRow(rowData);
-	}*/
-	
-	/*public void updateListSelectBus(Bus newBus) {
-	   selectBusTable = (DefaultTableModel) tableSelectBus.getModel();
-	   Object[] rowData = new Object[3];
-	   rowData[0] = newBus.getVehicleID();
-	   rowData[1] = newBus.getModelString();
-	   rowData[2] = newBus.getMaxNumberOfSeats();
-	   selectBusTable.addRow(rowData);
-	}*/
-	
 	/**
-	 * This updates prices for breakfast, lunch, all inclusive and tickets
+	 * This updates prices for breakfast, lunch, all inclusive and tickets in textFieldPriceBreakfast, textFieldPriceLunch, textFieldPriceAllinclusive, textFieldPriceEntranceTickets fields
 	 */
 	public void updatePrices(){
 		textFieldPriceBreakfast.setText(Double.toString(priceList.getPriceBreakfast()));
@@ -5598,7 +5469,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 	
 	/**
-	 * This lists other busReservations to busReservationsTabel
+	 * This lists other busReservations to busReservationsTabel in busReservationsTable table
 	 */
 	public void listBusReservations(){
 		busReservationsTable = (DefaultTableModel) tableBusReservations.getModel();
@@ -5609,7 +5480,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				BusReservation otherBusReservation = (BusReservation)reservationsArchive.get(i);
 				rowData[0] = otherBusReservation.getReservationNumber();
 				rowData[1] = otherBusReservation.getDepartureDate();
-				rowData[2] = otherBusReservation.getCustomer().getOrganisationName();
+				rowData[2] = otherBusReservation.getCustomer().getName();
 				rowData[3] = otherBusReservation.getPassengersString();
 				rowData[4] = otherBusReservation.getChauffeur().getName();
 				rowData[5] = "#"+otherBusReservation.getBus().getVehicleID()+" "+otherBusReservation.getBus().getModel();
@@ -5621,7 +5492,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 	
 	/**
-    * This lists other tourReservations to busReservationsTabel
+    * This lists other tourReservations to busReservationsTabel in tourReservationsTable table
     */
 	public void listTourReservations(){
 		tourReservationsTable = (DefaultTableModel) tableTourReservations.getModel();
@@ -5632,7 +5503,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				TourReservation otherTourReservation = (TourReservation)reservationsArchive.get(i);
 				rowData[0] = otherTourReservation.getReservationNumber();
 				rowData[1] = otherTourReservation.getTour().getDestination()+" "+otherTourReservation.getTour().getDateIntervalString();
-				rowData[2] = otherTourReservation.getCustomer().getOrganisationName();
+				rowData[2] = otherTourReservation.getCustomer().getName();
 				rowData[3] = otherTourReservation.getPassengersString();
 				rowData[4] = otherTourReservation.getTotalPrice();
 				tourReservationsTable.addRow(rowData);
@@ -5641,14 +5512,14 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 
 	/**
-    * This lists tourReservation in tourReservationTable
+    * This lists tourReservation in tourReservationTable table
     */
 	public void updateListTourReservations(TourReservation newTourReservation){
 		tourReservationsTable = (DefaultTableModel) tableTourReservations.getModel();
 		Object[] rowData = new Object[5];
 		rowData[0] = newTourReservation.getReservationNumber();
 		rowData[1] = newTourReservation.getTour().getDestination() + " " + newTourReservation.getTour().getDateIntervalString();
-		rowData[2] = newTourReservation.getCustomer().getOrganisationName();
+		rowData[2] = newTourReservation.getCustomer().getName();
 		rowData[3] = newTourReservation.getPassengersString();
 		rowData[4] = newTourReservation.getTotalPrice();
 		tourReservationsTable.addRow(rowData);
@@ -5658,6 +5529,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// This method contains all code for creating and initializing components
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
+	@SuppressWarnings("serial")
 	private void initComponents() {
 		icon = new ImageIcon(Autobus.class.getResource("/ressources/icon_bus.png"));
 		
@@ -6106,11 +5978,15 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 				"#", "Earliest Departure", "Name", "Address", "Email", "Phone", "Birthday", "1 d only"
 			}
 		) {
-			/**
-          * 
-          */
-         private static final long serialVersionUID = 1L;
-         boolean[] columnEditables = new boolean[] {
+			@SuppressWarnings("rawtypes")
+			Class[] columnTypes = new Class[] {
+				Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Boolean.class
+			};
+			@SuppressWarnings({ "unchecked", "rawtypes" })
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
 				false, false, false, false, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
@@ -6622,24 +6498,26 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		gl_panelTours.setHorizontalGroup(
 			gl_panelTours.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelTours.createSequentialGroup()
-					.addComponent(panelTopTours, GroupLayout.DEFAULT_SIZE, 2706, Short.MAX_VALUE)
+					.addComponent(panelTopTours, GroupLayout.DEFAULT_SIZE, 1520, Short.MAX_VALUE)
 					.addGap(0))
 				.addGroup(gl_panelTours.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panelAddTour, GroupLayout.PREFERRED_SIZE, 607, GroupLayout.PREFERRED_SIZE)
-					.addGap(12)
+					.addComponent(panelAddTour, GroupLayout.PREFERRED_SIZE, 623, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panelTours.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelTours.createSequentialGroup()
-							.addGap(6)
 							.addComponent(lblUpdateTourButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(lblDeleteTourBtn))
+							.addGap(26)
+							.addComponent(lblDeleteTourBtn)
+							.addContainerGap())
+						.addGroup(gl_panelTours.createSequentialGroup()
+							.addComponent(scrollPaneToursArchive, GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+							.addGap(130))
 						.addGroup(gl_panelTours.createSequentialGroup()
 							.addComponent(lblSearchByDestination_1, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(searchTourTExtField, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE))
-						.addComponent(scrollPaneToursArchive, GroupLayout.PREFERRED_SIZE, 686, GroupLayout.PREFERRED_SIZE))
-					.addGap(52))
+							.addComponent(searchTourTExtField, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(525, Short.MAX_VALUE))))
 		);
 		gl_panelTours.setVerticalGroup(
 			gl_panelTours.createParallelGroup(Alignment.LEADING)
@@ -6653,7 +6531,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 								.addComponent(searchTourTExtField, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(scrollPaneToursArchive, GroupLayout.PREFERRED_SIZE, 301, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGap(13)
 							.addGroup(gl_panelTours.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblUpdateTourButton, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblDeleteTourBtn)))
@@ -6864,66 +6742,67 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 							.addComponent(lblSearchForAvailableInToursPanel, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panelAddTour.createSequentialGroup()
 							.addContainerGap()
-							.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panelAddTour.createSequentialGroup()
-									.addComponent(chckbxBreakfast)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(chckbxLunch)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(chckbxAllInclusive)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(chckbxEntranceTickets)
-									.addPreferredGap(ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
-									.addComponent(lblAddTourBtn))
-								.addGroup(gl_panelAddTour.createSequentialGroup()
-									.addGap(12)
-									.addGroup(gl_panelAddTour.createParallelGroup(Alignment.TRAILING)
-										.addGroup(gl_panelAddTour.createSequentialGroup()
-											.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
-												.addComponent(lblEndDate)
-												.addComponent(lblStartDate))
-											.addGap(13)
-											.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
-												.addComponent(textFieldEndMonth, 0, 0, Short.MAX_VALUE)
-												.addComponent(textFieldStartMonth, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
-												.addComponent(textFieldEndDay, 0, 0, Short.MAX_VALUE)
-												.addComponent(textFieldStartDay, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
-												.addComponent(textFieldStartYear, 0, 0, Short.MAX_VALUE)
-												.addComponent(textFieldEndYear, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)))
-										.addGroup(gl_panelAddTour.createSequentialGroup()
-											.addComponent(lblDestination)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(textFieldDestination, 193, 193, 193)
-											.addGap(6)))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
-										.addComponent(textFieldStartHour, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textFieldEndHour, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
-										.addComponent(textFieldStartMinute, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textFieldEndMinute, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
-									.addGap(23)
-									.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 5, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
-										.addComponent(scrollPanePickUps, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textFieldAddPickup, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addGroup(gl_panelAddTour.createSequentialGroup()
-											.addComponent(lblAddPickUpBtn)
-											.addGap(18)
-											.addComponent(lblClearPickUpBtn, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))))
+							.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
 								.addGroup(gl_panelAddTour.createSequentialGroup()
 									.addComponent(scrollPaneSelectBus, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(scrollPaneSelectChauffeur, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE))))
-						.addGroup(gl_panelAddTour.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(separator, GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)))
+									.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+									.addComponent(scrollPaneSelectChauffeur, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panelAddTour.createSequentialGroup()
+									.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panelAddTour.createSequentialGroup()
+											.addComponent(chckbxBreakfast)
+											.addPreferredGap(ComponentPlacement.UNRELATED)
+											.addComponent(chckbxLunch)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(chckbxAllInclusive)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(chckbxEntranceTickets)
+											.addGap(133)
+											.addComponent(lblAddTourBtn))
+										.addGroup(gl_panelAddTour.createSequentialGroup()
+											.addGap(12)
+											.addGroup(gl_panelAddTour.createParallelGroup(Alignment.TRAILING)
+												.addGroup(gl_panelAddTour.createSequentialGroup()
+													.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+														.addComponent(lblEndDate)
+														.addComponent(lblStartDate))
+													.addGap(13)
+													.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
+														.addComponent(textFieldEndMonth, 0, 0, Short.MAX_VALUE)
+														.addComponent(textFieldStartMonth, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
+													.addPreferredGap(ComponentPlacement.RELATED)
+													.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
+														.addComponent(textFieldEndDay, 0, 0, Short.MAX_VALUE)
+														.addComponent(textFieldStartDay, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+													.addPreferredGap(ComponentPlacement.RELATED)
+													.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
+														.addComponent(textFieldStartYear, 0, 0, Short.MAX_VALUE)
+														.addComponent(textFieldEndYear, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)))
+												.addGroup(gl_panelAddTour.createSequentialGroup()
+													.addComponent(lblDestination)
+													.addPreferredGap(ComponentPlacement.RELATED)
+													.addComponent(textFieldDestination, 193, 193, 193)
+													.addGap(6)))
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+												.addComponent(textFieldStartHour, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+												.addComponent(textFieldEndHour, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
+											.addPreferredGap(ComponentPlacement.UNRELATED)
+											.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+												.addComponent(textFieldStartMinute, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+												.addComponent(textFieldEndMinute, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
+											.addGap(23)
+											.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 5, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(scrollPanePickUps, GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+												.addGroup(gl_panelAddTour.createSequentialGroup()
+													.addComponent(lblAddPickUpBtn)
+													.addGap(18)
+													.addComponent(lblClearPickUpBtn, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+												.addComponent(textFieldAddPickup))))
+									.addPreferredGap(ComponentPlacement.RELATED, 0, Short.MAX_VALUE))
+								.addComponent(separator, GroupLayout.PREFERRED_SIZE, 575, GroupLayout.PREFERRED_SIZE))))
 					.addContainerGap())
 		);
 		gl_panelAddTour.setVerticalGroup(
@@ -6932,7 +6811,6 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelAddTour.createParallelGroup(Alignment.TRAILING)
 							.addGroup(gl_panelAddTour.createSequentialGroup()
-								.addContainerGap()
 								.addGroup(gl_panelAddTour.createParallelGroup(Alignment.BASELINE)
 									.addComponent(lblDestination)
 									.addComponent(textFieldDestination, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -6967,7 +6845,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(separator, GroupLayout.PREFERRED_SIZE, 2, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panelAddTour.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panelAddTour.createParallelGroup(Alignment.BASELINE)
 						.addComponent(scrollPaneSelectBus, GroupLayout.PREFERRED_SIZE, 191, GroupLayout.PREFERRED_SIZE)
 						.addComponent(scrollPaneSelectChauffeur, GroupLayout.PREFERRED_SIZE, 191, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -9133,59 +9011,58 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 		lblSelectBusNewBusResButton.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(5, 5, 5, 5)));
 		GroupLayout gl_panelNewBusReservationNext = new GroupLayout(panelNewBusReservationNext);
 		gl_panelNewBusReservationNext.setHorizontalGroup(
-		   gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
-		      .addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 1371, Short.MAX_VALUE)
-		      .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-		         .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.TRAILING, false)
-		            .addGroup(Alignment.LEADING, gl_panelNewBusReservationNext.createSequentialGroup()
-		               .addComponent(lblCancel)
-		               .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-		               .addComponent(lblOkNewBusResevation))
-		            .addGroup(Alignment.LEADING, gl_panelNewBusReservationNext.createSequentialGroup()
-		               .addContainerGap()
-		               .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.TRAILING)
-		                  .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-		                     .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING, false)
-		                        .addComponent(panelServicesNewBus, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE)
-		                        .addComponent(panelSelectBus, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE))
-		                     .addPreferredGap(ComponentPlacement.UNRELATED)
-		                     .addComponent(scrollPaneNewBusSelectBus, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
-		                     .addGap(18)
-		                     .addComponent(scrollPaneNewBusSelectChauffeur, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
-		                     .addGap(18))
-		                  .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-		                     .addComponent(lblSelectBusNewBusResButton, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-		                     .addGap(220)))
-		               .addComponent(textPaneSummaryNewBus, GroupLayout.PREFERRED_SIZE, 511, GroupLayout.PREFERRED_SIZE)))
-		         .addGap(54))
+			gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
+				.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 1369, Short.MAX_VALUE)
+				.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(Alignment.TRAILING, gl_panelNewBusReservationNext.createSequentialGroup()
+							.addComponent(lblCancel)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(lblOkNewBusResevation))
+						.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+							.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+									.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(panelServicesNewBus, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE)
+										.addComponent(panelSelectBus, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE))
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(scrollPaneNewBusSelectBus, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(scrollPaneNewBusSelectChauffeur, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
+									.addGap(18))
+								.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+									.addComponent(lblSelectBusNewBusResButton, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+									.addGap(220)))
+							.addComponent(textPaneSummaryNewBus, GroupLayout.PREFERRED_SIZE, 511, GroupLayout.PREFERRED_SIZE)))
+					.addGap(54))
 		);
 		gl_panelNewBusReservationNext.setVerticalGroup(
-		   gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
-		      .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-		         .addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-		         .addGap(18)
-		         .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
-		            .addComponent(textPaneSummaryNewBus, GroupLayout.PREFERRED_SIZE, 426, GroupLayout.PREFERRED_SIZE)
-		            .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-		               .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
-		                  .addComponent(scrollPaneNewBusSelectChauffeur, GroupLayout.PREFERRED_SIZE, 386, GroupLayout.PREFERRED_SIZE)
-		                  .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING, false)
-		                     .addComponent(scrollPaneNewBusSelectBus, 0, 0, Short.MAX_VALUE)
-		                     .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-		                        .addComponent(panelSelectBus, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE)
-		                        .addGap(18)
-		                        .addComponent(panelServicesNewBus, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE))))
-		               .addPreferredGap(ComponentPlacement.RELATED)
-		               .addComponent(lblSelectBusNewBusResButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
-		         .addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
-		            .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-		               .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-		               .addComponent(lblCancel)
-		               .addGap(361))
-		            .addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
-		               .addPreferredGap(ComponentPlacement.UNRELATED)
-		               .addComponent(lblOkNewBusResevation)
-		               .addContainerGap())))
+			gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
+						.addComponent(textPaneSummaryNewBus, GroupLayout.PREFERRED_SIZE, 426, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+							.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPaneNewBusSelectChauffeur, GroupLayout.PREFERRED_SIZE, 386, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING, false)
+									.addComponent(scrollPaneNewBusSelectBus, 0, 0, Short.MAX_VALUE)
+									.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+										.addComponent(panelSelectBus, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE)
+										.addGap(18)
+										.addComponent(panelServicesNewBus, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE))))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblSelectBusNewBusResButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
+					.addGroup(gl_panelNewBusReservationNext.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(lblOkNewBusResevation))
+						.addGroup(gl_panelNewBusReservationNext.createSequentialGroup()
+							.addGap(5)
+							.addComponent(lblCancel)))
+					.addGap(355))
 		);
 		
 		chckbxBreakfastNewBus = new JCheckBox("Breakfast");
@@ -9465,7 +9342,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 
 	/**
-	 * This returns date
+	 * 
 	 * @param date
 	 * @return
 	 */
@@ -9491,9 +9368,9 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 	
 	/**
-	 * Pops up orOrCancel message
+	 * Pops up orOrCancel message that asks user if he really wants to do something(usually with important methods like: remove, add etc.). There are two Buttons in alertMessage: OK and Cancel. If user presses OK Button, then the made the confirmation and the action is made after the Button is pressed. If the user presses Cancel Button, then the action is declined 
 	 * @param alertMessage - alert message that pops up
-	 * @return
+	 * @return result
 	 */
 	public static int okOrCancel(String alertMessage) {
 	    int result = JOptionPane.showConfirmDialog((Component) null, alertMessage,
@@ -9505,7 +9382,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	 * Returns difference between days according to startDate and endDate
 	 * @param startDate - start date
 	 * @param endDate - end date
-	 * @return
+	 * @return days
 	 */
 	public static int daysBetweenDates(java.util.Date startDate, java.util.Date endDate){
 		long days = ChronoUnit.DAYS.between(startDate.toInstant(), endDate.toInstant());
@@ -9513,7 +9390,7 @@ JRadioButton radioButtonIsSchoolNewTourReservation;
 	}
 
 	/**
-	 * This deletes all rows
+	 * This deletes all rows in the selected table(used for search)
 	 * @param model
 	 */
 	public void deleteAllRows(final DefaultTableModel model) {

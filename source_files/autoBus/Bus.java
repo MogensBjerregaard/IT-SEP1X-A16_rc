@@ -2,13 +2,16 @@ package autoBus;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.Date;
+
 
 public class Bus implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private  ArrayList<java.util.Date[]> listOfStartEndDates;
-	private int datePointer; /*an util field which helps to add new item to listOfStartEndDates in right place*/
+	/**
+	 * An util field which helps to add new item to listOfStartEndDates in right place
+	 */
+	private int datePointer;
 	private int maxNumberOfSeats;
 	private String vehicleID;
 	private double pricePerHour;
@@ -16,15 +19,15 @@ public class Bus implements Serializable{
 	private boolean availableForTours;
 
 	/**
-	 * This returns listOfStartEndDates
+	 * This returns listOfStartEndDates ArrayList
 	 * @return List of start end dates for this Bus
 	 */
-	public  ArrayList<Date[]> getListOfStartEndDates() {
+	public  ArrayList<java.util.Date[]> getListOfStartEndDates() {
 		return this.listOfStartEndDates;
 	}
 	
 	/**
-	 * This returns datePointer
+	 * This returns datePointer int
 	 * @return An util field which helps to add new item to listOfStartEndDates in right place
 	 */
 	public int getDatePointer() {
@@ -33,7 +36,7 @@ public class Bus implements Serializable{
 
 	/**
 	 * This returns a String that contains: startMonth, startDay, startYear, startHour and startMinute
-	 * @return Earliest departure date string of this Bus
+	 * @return Earliest departure date String of this Bus
 	 */
 	public String getEarliestDepartureString(){
 		java.util.Date now = new java.util.Date();
@@ -88,7 +91,7 @@ public class Bus implements Serializable{
 	 * @param durationInHours - duration of the trip in hours
 	 * @return if this Bus is available for the trip
 	 */
-	public boolean isAvailable(Date startDate, int durationInHours) {
+	public boolean isAvailable(java.util.Date startDate, int durationInHours) {
 			if(this.listOfStartEndDates.isEmpty()) {
 				datePointer = 0;
 				return true;
@@ -100,7 +103,9 @@ public class Bus implements Serializable{
 			for (int j = 0; j < listOfStartEndDates.size() - 1; j++) {
                 if (startDate.after(listOfStartEndDates.get(j)[1]) && startDate.before(listOfStartEndDates.get(j + 1)[0])) {
                     datePointer = j+1;
-                    return (listOfStartEndDates.get(j + 1)[0].getTime() - startDate.getTime()) / 3600000 > durationInHours + 48;
+                    return ((listOfStartEndDates.get(j + 1)[0].getTime() - startDate.getTime()) / 3600000 > durationInHours + 24
+							&&
+							(startDate.getTime() - listOfStartEndDates.get(j)[1].getTime()) / 3600000 > 24);
                 }
             }
 			datePointer = listOfStartEndDates.size();
@@ -109,22 +114,22 @@ public class Bus implements Serializable{
 	}
 
 	/**
-	 * This adds newStartEndDate in listOfStartEndDates
-	 * @param newStartEndDate - start and end date of the new reservation
+	 * This adds newStartEndDate in listOfStartEndDates table
+	 * @param newStartEndDate - start and end date of the new Reservation
 	 */
 	public void addNewReservationPeriod(java.util.Date[] newStartEndDate){
 		listOfStartEndDates.add(datePointer, newStartEndDate);
 	}
 	
 	/**
-	 * This returns vehicleId, model and maxNumberOfSeats of this Bus
+	 * This returns A string with: vehicleId, model and maxNumberOfSeats of this Bus
 	 */
 	public String toString(){
 		return "Bus ID#: "+vehicleID+", Type: "+model+", Seats: "+maxNumberOfSeats;
 	}
 	
 	/**
-	 * This returns naxNumberOfSeats of this Bus
+	 * This returns int with maxNumberOfSeats of this Bus
 	 * @return maximum number of seats of this Bus
 	 */
 	public int getMaxNumberOfSeats() {
@@ -139,28 +144,9 @@ public class Bus implements Serializable{
 		this.maxNumberOfSeats = maxNumberOfSeats;
 	}
 
-	/*public int getSeatsAvailable() {
-		return seatsAvailable;
-	}
-
-	public void setSeatsAvailable(int seatsAvailable) {
-		this.seatsAvailable = seatsAvailable;
-	}
-	
-	public void removeSeat(){
-		if (seatsAvailable>0){
-			seatsAvailable--;
-		}
-	}
-	
-	public void addSeat(){
-		if (seatsAvailable<maxNumberOfSeats){
-			seatsAvailable++;
-		}
-	}*/
 
 	/**
-	 * This returns vehicleID of this Bus
+	 * This returns String with vehicleID of this Bus
 	 * @return ID of this Bus
 	 */
 	public String getVehicleID() {
@@ -169,14 +155,14 @@ public class Bus implements Serializable{
 
 	/**
 	 * This sets vehicleID for this Bus
-	 * @param ID for this Bus
+	 * @param vehicleID for this Bus
 	 */
 	public void setVehicleID(String vehicleID) {
 		this.vehicleID = vehicleID;
 	}
 
 	/**
-	 * This returns pricePerHour of this Bus
+	 * This returns double with pricePerHour of this Bus
 	 * @return price per hour of this Bus
 	 */
 	public double getPricePerHour() {
@@ -185,14 +171,14 @@ public class Bus implements Serializable{
 
 	/**
 	 * This sets pricePerHour for this Bus
-	 * @param  price per hour for this Bus
+	 * @param  pricePerHour per hour for this Bus
 	 */
 	public void setPricePerHour(double pricePerHour) {
 		this.pricePerHour = pricePerHour;
 	}
 
 	/**
-	 * This returns model of this Bus
+	 * This returns String with model of this Bus
 	 * @return model of this Bus
 	 */
 	public String getModel() {
@@ -216,7 +202,7 @@ public class Bus implements Serializable{
 	}
 
 	/**
-	 * This returns availableForTours for this Bus
+	 * This returns boolean availableForTours for this Bus
 	 * @return available for tours for this Bus
 	 */
 	public boolean isAvailableForTours() {
@@ -227,9 +213,7 @@ public class Bus implements Serializable{
 	 * This sets availableForTours for this Bus
 	 * @param availableForTours - available for tours for this Bus
 	 */
-	public void setAvailableForTours(boolean availableForTours) {
-		this.availableForTours = availableForTours;
-	}	
+
 	
 	
 }

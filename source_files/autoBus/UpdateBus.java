@@ -28,6 +28,7 @@ public class UpdateBus extends JPanel {
     */
    private static final long serialVersionUID = 1L;
     private final JLabel lblCancelUpdateBusButton;
+    private final JLabel lblBackUpdateBusButton;
     private Bus currentlyUpdatingBus;
    private JTextField pricePerHourTextFieldUpdateBus;
    private JTextField numberOfSeatsTextFieldUpdateBus;
@@ -44,6 +45,14 @@ public class UpdateBus extends JPanel {
     * All methods for this UpdateBus
     */
    public void createEvents() {
+
+       lblBackUpdateBusButton.addMouseListener(new MouseAdapter() {
+           @Override
+           public void mouseReleased(MouseEvent event) {
+               Autobus.frame.hideAllPanels();
+               Autobus.frame.panelBuses.setVisible(true);
+           }
+       });
        
       /**
         * Cancel Button
@@ -51,7 +60,7 @@ public class UpdateBus extends JPanel {
        lblCancelUpdateBusButton.addMouseListener(new MouseAdapter() {
              @Override
              /**
-              * This shows an okOrCancel message 
+              * This shows an okOrCancel message after the button has been clicked and asks the user if he wants to cancel changing this bus
               */
              public void mouseReleased(MouseEvent event) {
                  if(Autobus.okOrCancel("Are you sure you want to cancel changing this bus?") == 0) {
@@ -67,7 +76,7 @@ public class UpdateBus extends JPanel {
       Autobus.frame.lblShowFullDescription.addMouseListener(new MouseAdapter() {
          @Override
          /**
-          * This fills additional Bus information after the button has been clicked
+          * This fills additional Bus information in necessary fields of the specific Bus after the button has been clicked
           */
          public void mouseReleased(MouseEvent event){
 
@@ -140,14 +149,14 @@ public class UpdateBus extends JPanel {
             }
          }
       });
-      
+
       /**
        * Update Bus button
        */
       lblUpdateBus.addMouseListener(new MouseAdapter() {
          @Override
          /**
-          * This updates vehicleID, pricePerHour, maxNumberOfSeats and model for this Bus. 
+          * This adds updated vehicleID, pricePerHour, maxNumberOfSeats and model information for this Bus
           */
          public void mouseReleased(MouseEvent event){
             if(Autobus.okOrCancel("Are you sure you want to save these changes") == 0){
@@ -182,7 +191,7 @@ public class UpdateBus extends JPanel {
        */
       standardUpdateRadioButton.addActionListener(new ActionListener() {
          /**
-          * Only standard Radio button is selected
+          * Makes only standard Radio button to be selected, disabling luxury and party radio buttons
           */
          public void actionPerformed(ActionEvent arg0) {
             partyUpdateRadioButton.setSelected(false);
@@ -195,7 +204,7 @@ public class UpdateBus extends JPanel {
        */
       partyUpdateRadioButton.addActionListener(new ActionListener() {
          /**
-          * Only party Radio button is selected
+          * Makes only party Radio button to be selected, disabling standard and luxury radio buttons
           */
          public void actionPerformed(ActionEvent e) {
             standardUpdateRadioButton.setSelected(false);
@@ -208,7 +217,7 @@ public class UpdateBus extends JPanel {
        */
       luxuryUpdateRadioButton.addActionListener(new ActionListener() {
          /**
-          * Only luxury Radio button is selected
+          * Makes only luxury Radio button to be selected, disabling standard and party radio buttons
           */
          public void actionPerformed(ActionEvent e) {
             standardUpdateRadioButton.setSelected(false);
@@ -389,11 +398,16 @@ public class UpdateBus extends JPanel {
       scrollPane.setFont(new Font("Century Gothic", Font.PLAIN, 12));
       scrollPane.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255), 1, true), "Buses archive", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)), new EmptyBorder(5, 5, 5, 5)));
       scrollPane.setBackground(new Color(95, 158, 160));
+
+       lblBackUpdateBusButton = new JLabel("Back");
+      lblBackUpdateBusButton.setForeground(Color.WHITE);
+      lblBackUpdateBusButton.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+      lblBackUpdateBusButton.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(2, 2, 2, 2)));
       GroupLayout gl_panel = new GroupLayout(panel);
       gl_panel.setHorizontalGroup(
       	gl_panel.createParallelGroup(Alignment.LEADING)
       		.addGroup(gl_panel.createSequentialGroup()
-      			.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+      			.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 1046, Short.MAX_VALUE)
       			.addGap(0))
       		.addGroup(gl_panel.createSequentialGroup()
       			.addGap(12)
@@ -401,6 +415,10 @@ public class UpdateBus extends JPanel {
       			.addGap(18)
       			.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 507, GroupLayout.PREFERRED_SIZE)
       			.addContainerGap(191, Short.MAX_VALUE))
+      		.addGroup(gl_panel.createSequentialGroup()
+      			.addContainerGap()
+      			.addComponent(lblBackUpdateBusButton)
+      			.addContainerGap(994, Short.MAX_VALUE))
       );
       gl_panel.setVerticalGroup(
       	gl_panel.createParallelGroup(Alignment.LEADING)
@@ -410,7 +428,9 @@ public class UpdateBus extends JPanel {
       			.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
       				.addComponent(scrollPane, 0, 0, Short.MAX_VALUE)
       				.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 368, GroupLayout.PREFERRED_SIZE))
-      			.addContainerGap(412, Short.MAX_VALUE))
+      			.addPreferredGap(ComponentPlacement.UNRELATED)
+      			.addComponent(lblBackUpdateBusButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+      			.addGap(374))
       );
       
       tableUpdateBus = new JTable();
